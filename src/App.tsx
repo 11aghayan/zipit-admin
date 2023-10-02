@@ -1,10 +1,13 @@
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
+import AddModalContextProvider from "./context/addModalContext/AddModalContextProvider";
 
 function App() {
 
   return (
-    <RouterProvider router={router} />
+    <AddModalContextProvider>
+      <RouterProvider router={router} />
+    </AddModalContextProvider>
   );
 }
 
