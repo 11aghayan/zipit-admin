@@ -1,6 +1,12 @@
+import useAddModalContext from "@/context/addModalContext/useAddModalContext";
+
 import AddModalButtons from "./AddModalButtons";
+import CategoryForm from "./CategoryForm";
+import ItemForm from "./ItemForm";
+import SpreadsheetForm from "./SpreadsheetForm";
 
 const AddModalForm = () => {
+  const { variant } = useAddModalContext();
 
   return (
     <form className="
@@ -13,28 +19,20 @@ const AddModalForm = () => {
         shadow-lg  
         w-full 
         max-w-lg
+        mx-2
       ">
-        <div>
-          <label htmlFor="label">
-            Category Name
-          </label>
-          <input 
-            id="label"
-            type="text" 
-            className="
-              mt-1 
-              text-lg 
-              text-gray-900 
-              font-normal 
-              px-2 
-              py-1 
-              w-full 
-              border 
-              border-gray-500 
-              rounded-md
-            "
-          />
-        </div>
+        {
+          variant === 'category'
+          ?
+          <CategoryForm />
+          :
+          variant === 'spreadsheet'
+          ?
+          <SpreadsheetForm /> 
+          :
+          <ItemForm />
+          
+        }
         <AddModalButtons />
       </form>
   );

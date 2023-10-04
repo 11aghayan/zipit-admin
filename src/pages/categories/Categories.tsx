@@ -1,12 +1,12 @@
-import AddButton from "./components/AddButton";
+import AddButton from "@/components/AddButton";
 
 const Categories = () => {
   
-
   return (
     <main>
       <AddButton 
         label="Add Category"
+        variant="category"
       />
     </main>
   );
