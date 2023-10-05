@@ -8,5 +8,9 @@ export type ModalContextType = {
 };
 
 export type ItemFormType = {
-  categories: string[]
+  categories: string[];
+  name: string;
+  price: number;
+  qty: number;
+  description?: string;
 };

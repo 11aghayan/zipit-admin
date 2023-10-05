@@ -7,11 +7,6 @@ const AddModalButtons = () => {
     toggleOpen();
     setVariant(null);
   };
-
-  const handleSave = () => {
-    
-    setVariant(null);
-  };
   
   return (
     <div className="flex items-center justify-end gap-5">
@@ -23,7 +18,6 @@ const AddModalButtons = () => {
         Cancel
       </button>
       <button
-        onClick={handleSave}
         className="bg-yellow-500 p-2 pt-1 pb-[6px] text-lg rounded-xl font-semibold text-white hover:brightness-105"
         type="submit"
       >

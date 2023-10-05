@@ -12,7 +12,7 @@ const ItemForm = () => {
         <input 
           id="name"
           type="text"
-          name="item-name"
+          name="name"
         />
       </div>
       <div className="flex gap-3">
@@ -24,7 +24,7 @@ const ItemForm = () => {
             id="price"
             type="number"
             defaultValue={0}
-            name="item-price"
+            name="price"
           />
         </div>
         <div>
@@ -35,7 +35,7 @@ const ItemForm = () => {
             id="qty"
             type="number"
             defaultValue={0}
-            name="item-qty"
+            name="qty"
           />
         </div>
       </div>
@@ -44,7 +44,7 @@ const ItemForm = () => {
           Description
         </label>
         <textarea 
-          name="item-description" 
+          name="description" 
           id="description"
           className="min-h-[100px]"
         />
