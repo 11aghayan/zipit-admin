@@ -16,7 +16,7 @@ const AddButton = ({ label, variant }: Props) => {
   
   return (
     <button
-      className="bg-emerald-600 px-2 pt-[2px] pb-[4px] rounded-full text-white font-regular text-lg hover:brightness-110"
+      className="bg-emerald-600 px-3 pt-1 pb-[6px] rounded-full text-white font-regular text-lg hover:brightness-110"
       onClick={handleClick}
     >
       {label}

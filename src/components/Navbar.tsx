@@ -15,7 +15,8 @@ const Navbar = () => {
                 text-xl 
                 font-medium
                 px-2
-                pb-[2px]
+                pt-1
+                pb-[6px]
                 rounded-md
                 ${isActive ? 
                     'bg-sky-700 text-white' : 

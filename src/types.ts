@@ -6,3 +6,7 @@ export type ModalContextType = {
   variant: ModalVariantType;
   setVariant: React.Dispatch<React.SetStateAction<ModalVariantType>>;
 };
+
+export type ItemFormType = {
+  categories: string[]
+};

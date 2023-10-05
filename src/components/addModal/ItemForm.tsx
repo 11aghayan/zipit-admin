@@ -1,8 +1,10 @@
+import CategorySelector from "./CategorySelector";
+
 const ItemForm = () => {
-  
 
   return (
     <>
+      <CategorySelector />
       <div>
         <label htmlFor="name">
           Name
@@ -10,6 +12,7 @@ const ItemForm = () => {
         <input 
           id="name"
           type="text"
+          name="item-name"
         />
       </div>
       <div className="flex gap-3">
@@ -21,6 +24,7 @@ const ItemForm = () => {
             id="price"
             type="number"
             defaultValue={0}
+            name="item-price"
           />
         </div>
         <div>
@@ -31,6 +35,7 @@ const ItemForm = () => {
             id="qty"
             type="number"
             defaultValue={0}
+            name="item-qty"
           />
         </div>
       </div>
@@ -39,7 +44,7 @@ const ItemForm = () => {
           Description
         </label>
         <textarea 
-          name="description" 
+          name="item-description" 
           id="description"
           className="min-h-[100px]"
         />

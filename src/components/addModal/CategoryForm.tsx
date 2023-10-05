@@ -8,6 +8,7 @@ const CategoryForm = () => {
       <input 
         id="label"
         type="text"
+        name="category-name"
       />
     </div>
   );

@@ -1,4 +1,8 @@
+import { useRef } from "react";
+
 import useAddModalContext from "@/context/addModalContext/useAddModalContext";
+import { ItemFormType } from "@/types";
+import handleSubmit  from "@/utils/handleItemSubmit";
 
 import AddModalButtons from "./AddModalButtons";
 import CategoryForm from "./CategoryForm";
@@ -8,8 +12,13 @@ import SpreadsheetForm from "./SpreadsheetForm";
 const AddModalForm = () => {
   const { variant } = useAddModalContext();
 
+  const queryRef = useRef<ItemFormType>({
+    categories: []
+  });
+
   return (
-    <form className="
+    <form 
+      className="
         flex 
         flex-col 
         gap-4 
@@ -20,7 +29,9 @@ const AddModalForm = () => {
         w-full 
         max-w-lg
         mx-2
-      ">
+      "
+      onSubmit={e => handleSubmit(e, queryRef)}
+    >
         {
           variant === 'category'
           ?

@@ -6,8 +6,9 @@ const SignOutBtn = () => {
       className="
         bg-red-500
         rounded-full 
-        px-2 
-        pb-[2px]
+        px-3 
+        pt-1
+        pb-[6px]
         text-gray-200
         text-lg
         font-medium
