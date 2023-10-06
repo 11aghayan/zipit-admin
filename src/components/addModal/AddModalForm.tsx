@@ -7,7 +7,6 @@ import handleItemSubmit  from "@/utils/handleItemSubmit";
 import AddModalButtons from "./AddModalButtons";
 import CategoryForm from "./CategoryForm";
 import ItemForm from "./ItemForm";
-import SpreadsheetForm from "./SpreadsheetForm";
 
 const AddModalForm = () => {
   const { variant } = useAddModalContext();
@@ -47,12 +46,7 @@ const AddModalForm = () => {
           ?
           <CategoryForm />
           :
-          variant === 'spreadsheet'
-          ?
-          <SpreadsheetForm /> 
-          :
           <ItemForm />
-          
         }
         <AddModalButtons />
       </form>

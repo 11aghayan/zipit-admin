@@ -1,4 +1,5 @@
 import CategorySelector from "./CategorySelector";
+import ColorPicker from "./ColorPicker";
 
 const ItemForm = () => {
 
@@ -15,30 +16,39 @@ const ItemForm = () => {
           name="name"
         />
       </div>
-      <div className="flex gap-3">
-        <div>
-          <label htmlFor="price">
-            Price
-          </label>
-          <input 
-            id="price"
-            type="number"
-            defaultValue={0}
-            name="price"
-          />
-        </div>
-        <div>
-          <label htmlFor="qty">
-            Quantity
-          </label>
-          <input 
-            id="qty"
-            type="number"
-            defaultValue={0}
-            name="qty"
-          />
-        </div>
+      <div>
+        <label htmlFor="price">
+          Price
+        </label>
+        <input 
+          id="price"
+          type="number"
+          defaultValue={0}
+          name="price"
+        />
       </div>
+      <div>
+        <label htmlFor="qty">
+          Quantity
+        </label>
+        <input 
+          id="qty"
+          type="number"
+          defaultValue={0}
+          name="qty"
+        />
+      </div>
+      <div>
+        <label htmlFor="size">
+          Size
+        </label>
+        <input 
+          id="size"
+          type="text"
+          name="size"
+        />
+      </div>
+      <ColorPicker />
       <div className="block">
         <label htmlFor="description">
           Description

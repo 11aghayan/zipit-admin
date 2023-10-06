@@ -31,25 +31,6 @@ const handleItemSubmit = (e: React.FormEvent<HTMLFormElement>, queryRef: React.M
   }
 
   const query = queryRef.current;
-
-  if (query.categories.length < 1) {
-    console.log('At least 1 category must be provided');
-    return;
-  } 
-
-  if (!query.name) {
-    console.log('Name must be provided');
-    return;
-  }
-
-  if (!query.price) {
-    console.log('Price cannot be 0');
-    return;
-  }
-
-  if (typeof query.description === 'number') {
-    query.description = ''; 
-  }
   
   console.log(query);
 };

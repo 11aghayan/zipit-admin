@@ -1,4 +1,4 @@
-export type ModalVariantType = 'category' | 'item' | 'spreadsheet' | null;
+export type ModalVariantType = 'category' | 'item' | null;
 
 export type ModalContextType = {
   isOpen: boolean;
@@ -7,8 +7,8 @@ export type ModalContextType = {
   setVariant: React.Dispatch<React.SetStateAction<ModalVariantType>>;
 };
 
-export type ItemFormType = {
-  categories: string[];
+export type ItemFormType<T> = {
+  categories: T;
   name: string;
   price: number;
   qty: number;
