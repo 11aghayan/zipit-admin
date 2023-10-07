@@ -1,9 +1,12 @@
-const categories = ['shoes', 't-shirts', 'pants'];
+type Props = {
+  categories: string[];
+  category: string;
+  setCategory: React.Dispatch<React.SetStateAction<string>>;
+};
 
-const CategorySelector = () => {
-  
+const CategorySelector = ({ categories, category, setCategory }: Props) => {
 
-  return (
+    return (
     <div>
       {
         !categories.length
@@ -15,6 +18,8 @@ const CategorySelector = () => {
           <select 
             name="category"
             className="capitalize"
+            defaultValue={category}
+            onChange={e => setCategory(e.currentTarget.value)}
           >
             {
               categories.map(c => (

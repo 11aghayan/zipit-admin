@@ -14,3 +14,22 @@ export type ItemFormType<T> = {
   qty: number;
   description?: string;
 };
+
+export type ColorType = {
+  color: string;
+  qty: number;
+};
+
+export type LanguageStringType = {
+  am: string;
+  ru: string;
+};
+
+export type MinOrderType = {
+  qty: number;
+  unit: MinOrderUnitType;
+};
+
+export type MinOrderUnitType = 'pcs' | 'cm' | 'box';
+
+export type PromoType = number | null;

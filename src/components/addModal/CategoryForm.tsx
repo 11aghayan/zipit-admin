@@ -1,7 +1,15 @@
+import AddModalForm from "./AddModalForm";
+
 const CategoryForm = () => {
+
+  const onSubmit = () => {
+    
+  };
   
   return (
-    <div>
+    <AddModalForm
+      submit={onSubmit}
+    >
       <label htmlFor="label">
         Category Name
       </label>
@@ -10,7 +18,7 @@ const CategoryForm = () => {
         type="text"
         name="category-name"
       />
-    </div>
+    </AddModalForm>
   );
 };
 

@@ -1,28 +1,15 @@
-import { useRef } from "react";
-
-import useAddModalContext from "@/context/addModalContext/useAddModalContext";
-import { ItemFormType } from "@/types";
-import handleItemSubmit  from "@/utils/handleItemSubmit";
-
 import AddModalButtons from "./AddModalButtons";
-import CategoryForm from "./CategoryForm";
-import ItemForm from "./ItemForm";
 
-const AddModalForm = () => {
-  const { variant } = useAddModalContext();
+type Props = {
+  children: React.ReactNode;
+  submit: () => void;
+};
 
-  const queryRef = useRef<ItemFormType>({
-    categories: [],
-    name: '',
-    price: 0,
-    qty: 0
-  });
+const AddModalForm = ({ children, submit }: Props) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (variant === 'item') {
-      handleItemSubmit(e, queryRef);
-    }
+    submit();
   };
 
   return (
@@ -37,17 +24,12 @@ const AddModalForm = () => {
         shadow-lg  
         w-full 
         max-w-lg
-        mx-2
+        m-2
+        h-fit
       "
       onSubmit={handleSubmit}
     >
-        {
-          variant === 'category'
-          ?
-          <CategoryForm />
-          :
-          <ItemForm />
-        }
+        { children }
         <AddModalButtons />
       </form>
   );

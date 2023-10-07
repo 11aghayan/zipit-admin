@@ -10,10 +10,6 @@ const Items = () => {
           label="Add Item"
           variant="item"
         />
-        <AddButton 
-          label="Add Spreadsheet"
-          variant="spreadsheet"
-        />
       </div>
     </main>
   );
