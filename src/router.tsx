@@ -1,8 +1,8 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 
+import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
-import Layout from "@/components/Layout";
 import Categories from "@/pages/categories/Categories";
 import Category from "@/pages/categories/Category";
 import Items from "@/pages/items/Items";

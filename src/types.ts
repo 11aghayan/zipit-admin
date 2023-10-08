@@ -7,12 +7,22 @@ export type ModalContextType = {
   setVariant: React.Dispatch<React.SetStateAction<ModalVariantType>>;
 };
 
-export type ItemFormType<T> = {
-  categories: T;
-  name: string;
+export type CategoryType = {
+  id: number;
+  label: string;
+  items: ItemType[]
+};
+
+export type ItemType = {
+  id: number;
+  category: string;
+  name: LanguageStringType;
   price: number;
-  qty: number;
-  description?: string;
+  promo: PromoType;
+  size: SizeType;
+  minOrder: MinOrderType;
+  colors: ColorType[];
+  description: LanguageStringType;
 };
 
 export type ColorType = {
@@ -31,5 +41,12 @@ export type MinOrderType = {
 };
 
 export type MinOrderUnitType = 'pcs' | 'cm' | 'box';
+
+export type SizeType = {
+  val: number;
+  unit: SizeUnitType;
+};
+
+export type SizeUnitType = 'mm' | 'cm' | 'm';
 
 export type PromoType = number | null;

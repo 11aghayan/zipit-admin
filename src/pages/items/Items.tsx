@@ -1,16 +1,20 @@
 import AddButton from "@/components/AddButton";
+import ItemsList from "./components/ItemsList";
 
 const Items = () => {
   
 
   return (
     <main>
-      <div className="flex flex-col w-fit gap-2">
+      <section className="flex flex-col w-fit gap-2">
         <AddButton 
           label="Add Item"
           variant="item"
         />
-      </div>
+      </section>
+      <section className="pt-5">
+        <ItemsList />
+      </section>
     </main>
   );
 };

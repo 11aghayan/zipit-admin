@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { ColorType, LanguageStringType, MinOrderType, PromoType } from "@/types";
+import { useEffect, useState } from "react";
+
+import { CategoryType, ColorType, LanguageStringType, MinOrderType, PromoType, SizeType } from "@/types";
+import axios from '@/libs/axios';
 
 import AddModalForm from "./AddModalForm";
 import CategorySelector from "./CategorySelector";
@@ -8,20 +10,27 @@ import Name from "./Name";
 import Description from "./Description";
 import MinOrder from "./MinOrder";
 import Promo from "./Promo";
+import Size from "./Size";
 
 const ItemForm = () => {
-  const categories: string[] = ['shoes', 't-shirts', 'pants'];
+  const [categories, setCategories] = useState<CategoryType[]>([]);
   
-  const [category, setCategory] = useState(categories[0]);
+  const [category, setCategory] = useState(categories[0]?.label || '');
   const [name, setName] = useState<LanguageStringType>({am: '', ru: ''});
   const [price, setPrice] = useState(0);
   const [promo, setPromo] = useState<PromoType>(null);
-  const [size, setSize] = useState<number>(0);
+  const [size, setSize] = useState<SizeType>({val: 0, unit: 'cm'});
   const [minOrder, setMinOrder] = useState<MinOrderType>({qty: 0, unit: 'pcs'});
   const [colors, setColors] = useState<ColorType[]>([]);
   const [description, setDescription] = useState<LanguageStringType>({am: '', ru: ''});
 
   const [errorMessage, setErrorMessage] = useState<string>('');
+
+  useEffect(() => {
+    axios.get('/categories')
+      .then(data => setCategories(data.data))
+      .catch(console.log);
+  }, [categories]);
   
   const onSubmit = () => {
     if (!category) return setErrorMessage('Category not provided');
@@ -79,19 +88,10 @@ const ItemForm = () => {
         promo={promo}
         setPromo={setPromo}
       />
-      <div>
-        <label htmlFor="size">
-          Size
-        </label>
-        <input 
-          id="size"
-          type="number"
-          name="size"
-          min={0}
-          defaultValue={size}
-          onChange={e => setSize(Number(e.target.value))}
-        />
-      </div>
+      <Size 
+        size={size}
+        setSize={setSize}
+      />
       <MinOrder 
         minOrder={minOrder}
         setMinOrder={setMinOrder}

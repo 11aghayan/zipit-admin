@@ -1,5 +1,7 @@
+import { CategoryType } from "@/types";
+
 type Props = {
-  categories: string[];
+  categories: CategoryType[];
   category: string;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -24,11 +26,11 @@ const CategorySelector = ({ categories, category, setCategory }: Props) => {
             {
               categories.map(c => (
                 <option 
-                  key={c}
-                  value={c}
+                  key={c.label}
+                  value={c.label}
                   className="capitalize"
                 >
-                  {c}
+                  {c.label}
                 </option>
               ))
             }
