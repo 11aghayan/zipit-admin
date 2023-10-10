@@ -3,7 +3,6 @@ import router from "./router";
 import AddModalContextProvider from "./context/addModalContext/AddModalContextProvider";
 
 function App() {
-
   return (
     <AddModalContextProvider>
       <RouterProvider router={router} />

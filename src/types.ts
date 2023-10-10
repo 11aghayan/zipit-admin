@@ -1,10 +1,18 @@
 export type ModalVariantType = 'category' | 'item' | null;
 
+export type ModalDataType = ItemType | CategoryType | null;
+
+export type RequestType = 'post' | 'put';
+
 export type ModalContextType = {
   isOpen: boolean;
   toggleOpen: () => void; 
   variant: ModalVariantType;
   setVariant: React.Dispatch<React.SetStateAction<ModalVariantType>>;
+  data: ModalDataType;
+  setData: (data: ModalDataType) => void;
+  request: RequestType;
+  setRequest: (request: RequestType) => void;
 };
 
 export type CategoryType = {

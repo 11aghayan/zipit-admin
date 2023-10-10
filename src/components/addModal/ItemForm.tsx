@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { CategoryType, ColorType, LanguageStringType, MinOrderType, PromoType, SizeType } from "@/types";
-import axios from '@/libs/axios';
+import getAllCategories from "@/actions/getAllCategories";
+import useAddModalContext from "@/context/addModalContext/useAddModalContext";
+import addItem from "@/actions/addItem";
+
+import { CategoryType, ColorType, ItemType, LanguageStringType, MinOrderType, ModalContextType, PromoType, SizeType } from "@/types";
 
 import AddModalForm from "./AddModalForm";
 import CategorySelector from "./CategorySelector";
@@ -11,26 +15,35 @@ import Description from "./Description";
 import MinOrder from "./MinOrder";
 import Promo from "./Promo";
 import Size from "./Size";
+import editItem from "@/actions/editItem";
 
 const ItemForm = () => {
-  const [categories, setCategories] = useState<CategoryType[]>([]);
+  const navigate = useNavigate();
+
+  const { data, request } = useAddModalContext() as ModalContextType;
+  const currentData = data as ItemType;
   
-  const [category, setCategory] = useState(categories[0]?.label || '');
-  const [name, setName] = useState<LanguageStringType>({am: '', ru: ''});
-  const [price, setPrice] = useState(0);
-  const [promo, setPromo] = useState<PromoType>(null);
-  const [size, setSize] = useState<SizeType>({val: 0, unit: 'cm'});
-  const [minOrder, setMinOrder] = useState<MinOrderType>({qty: 0, unit: 'pcs'});
-  const [colors, setColors] = useState<ColorType[]>([]);
-  const [description, setDescription] = useState<LanguageStringType>({am: '', ru: ''});
+  const [categories, setCategories] = useState<CategoryType[]>([]);
+  const strCategories = JSON.stringify(categories);
+
+  const [category, setCategory] = useState(currentData?.category || categories[0]?.label);
+  const [name, setName] = useState<LanguageStringType>(currentData?.name || {am: '', ru: ''});
+  const [price, setPrice] = useState(currentData?.price || 0);
+  const [promo, setPromo] = useState<PromoType>(currentData?.promo || null);
+  const [size, setSize] = useState<SizeType>(currentData?.size || {val: 0, unit: 'cm'});
+  const [minOrder, setMinOrder] = useState<MinOrderType>(currentData?.minOrder || {qty: 0, unit: 'pcs'});
+  const [colors, setColors] = useState<ColorType[]>(currentData?.colors || []);
+  const [description, setDescription] = useState<LanguageStringType>(currentData?.description || {am: '', ru: ''});
 
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   useEffect(() => {
-    axios.get('/categories')
-      .then(data => setCategories(data.data))
-      .catch(console.log);
-  }, [categories]);
+    getAllCategories()
+      .then(data => {
+        setCategories(data);
+        if (!category) setCategory(data[0]?.label);
+      });
+  }, [strCategories, category]);
   
   const onSubmit = () => {
     if (!category) return setErrorMessage('Category not provided');
@@ -44,7 +57,7 @@ const ItemForm = () => {
 
     setErrorMessage('');
     
-    const body = JSON.stringify({
+    const body: Omit<ItemType, 'id'> = {
       category,
       name, 
       price,
@@ -53,9 +66,29 @@ const ItemForm = () => {
       colors,
       description,
       minOrder
-    });
+    };
 
-    console.log(body);
+    if (request === 'post') {
+      addItem(body)
+        .then(res => {
+          if (res.ok) {
+            navigate(0);
+          } else {
+            setErrorMessage('Something went wrong');
+          }
+        });
+    } else if (request === 'put') {
+      editItem(body, data!.id)
+        .then(res => {
+          if (res.ok) {
+            navigate(0);
+          } else {
+            setErrorMessage('Something went wrong');
+          }
+        });
+    } else {
+      console.log('Unknown request type');
+    }
   };
 
   return (

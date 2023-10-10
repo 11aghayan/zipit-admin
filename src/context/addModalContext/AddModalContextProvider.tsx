@@ -1,4 +1,4 @@
-import { ModalContextType, ModalVariantType } from "@/types";
+import { ModalContextType, ModalDataType, ModalVariantType, RequestType } from "@/types";
 import { createContext, useState } from "react";
 
 export const ModalContext = createContext<ModalContextType | null>(null);
@@ -8,20 +8,32 @@ type Props = {
 };
 
 const AddModalContextProvider = ({ children }: Props) => {
-  const [props, setProps] = useState({
-    isOpen: false,
-  });
+  const [isOpen, setIsOpen] = useState(false);
   const [variant, setVariant] = useState<ModalVariantType>(null);
+  const [currentData, setCurrentData] = useState<ModalDataType>(null);
+  const [currentRequest, setCurrentRequest] = useState<RequestType>('post');
 
   const toggleOpen = () => {
-    setProps(prev => ({ ...prev, isOpen: !prev.isOpen }));
+    setIsOpen(prev => !prev);
+  };
+
+  const setData = (data: ModalDataType) => {
+    setCurrentData(data);
+  };
+
+  const setRequest = (request: RequestType) => {
+    setCurrentRequest(request);
   };
 
   const value: ModalContextType = {
-    isOpen: props.isOpen,
+    isOpen,
     toggleOpen,
     variant,
-    setVariant
+    setVariant,
+    data: currentData,
+    setData: setData,
+    request: currentRequest,
+    setRequest
   };
 
   return (

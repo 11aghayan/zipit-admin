@@ -7,7 +7,7 @@ type Props = {
 };
 
 const Promo = ({ promo, setPromo }: Props) => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(!!promo);
 
   useEffect(() => {
     setPromo(isChecked ? 0 : null);
@@ -21,6 +21,7 @@ const Promo = ({ promo, setPromo }: Props) => {
         </label>
         <input 
             type="checkbox" 
+            checked={isChecked}
             name="promoCheck" 
             id="promoCheck" 
             className="w-4 h-4"

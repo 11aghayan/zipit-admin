@@ -7,9 +7,10 @@ type Props = {
 }
 
 const AddButton = ({ label, variant }: Props) => {
-  const { toggleOpen, setVariant } = useAddModalContext();
+  const { toggleOpen, setVariant, setRequest } = useAddModalContext();
 
   const handleClick = () => {
+    setRequest('post');
     setVariant(variant);
     toggleOpen();
   };

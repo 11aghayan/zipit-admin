@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 
 import { ItemType } from "@/types";
-import axios from '@/libs/axios';
 
 import ItemCard from "./ItemCard";
+import getAllItems from "@/actions/getAllItems";
 
 const ItemsList = () => {
   const [items, setItems] = useState<ItemType[]>([]);
+  const stringItems = JSON.stringify(items);
 
   useEffect(() => {
-    axios.get('/items')
-      .then(data => setItems(data.data))
-      .catch(console.log);
-  }, [items]);
+      getAllItems()
+      .then(data => setItems(data));
+  }, [stringItems]);
 
   return (
     <div className="
@@ -24,7 +24,7 @@ const ItemsList = () => {
       "
     >
       {
-        items.length&&
+        items.length ?
         items.map(({
           id,
           name,
@@ -49,6 +49,8 @@ const ItemsList = () => {
             size={size}
           />
         ))
+        :
+        <p>No items to show</p>
       }
     </div>
   );

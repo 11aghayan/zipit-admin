@@ -1,9 +1,10 @@
 import useAddModalContext from "@/context/addModalContext/useAddModalContext";
 
 const AddModalButtons = () => {
-  const { toggleOpen, setVariant } = useAddModalContext();
+  const { toggleOpen, setVariant, setData } = useAddModalContext();
 
   const handleCancel = () => {
+    setData(null);
     toggleOpen();
     setVariant(null);
   };
