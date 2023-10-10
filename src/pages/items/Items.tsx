@@ -2,7 +2,6 @@ import AddButton from "@/components/AddButton";
 import ItemsList from "./components/ItemsList";
 
 const Items = () => {
-  
 
   return (
     <main>

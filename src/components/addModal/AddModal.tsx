@@ -1,4 +1,4 @@
-import useAddModalContext from "@/context/addModalContext/useAddModalContext";
+import useAddModalContext from "@/hooks/useAddModalContext";
 import cn from "@/utils/cn";
 import CategoryForm from "./CategoryForm";
 import ItemForm from "./ItemForm";

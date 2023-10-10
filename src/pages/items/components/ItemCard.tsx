@@ -1,6 +1,6 @@
 import type { ItemType } from "@/types";
+
 import Buttons from "./Buttons";
-import { useState } from "react";
 
 const ItemCard = ({ 
   name, 
@@ -13,8 +13,6 @@ const ItemCard = ({
   promo, 
   size 
 }: ItemType) => {
-
-  const [errorMessage, setErrorMessage] = useState('');
 
   return (
     <article
@@ -89,7 +87,6 @@ const ItemCard = ({
           {description.ru}
         </p>
       </div>
-      {errorMessage && <p className="mt-3 text-red-500 text-center">{errorMessage}</p>}
       <Buttons 
         data={{ 
           name, 
@@ -102,7 +99,6 @@ const ItemCard = ({
           promo, 
           size 
         }}
-        setErrorMessage={setErrorMessage}
       />
     </article>
   );

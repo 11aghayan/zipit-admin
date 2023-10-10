@@ -1,4 +1,4 @@
-import useAddModalContext from "@/context/addModalContext/useAddModalContext";
+import useAddModalContext from "@/hooks/useAddModalContext";
 
 const AddModalButtons = () => {
   const { toggleOpen, setVariant, setData } = useAddModalContext();

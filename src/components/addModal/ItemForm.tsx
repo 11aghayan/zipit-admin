@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import getAllCategories from "@/actions/getAllCategories";
-import useAddModalContext from "@/context/addModalContext/useAddModalContext";
+import useAddModalContext from "@/hooks/useAddModalContext";
 import addItem from "@/actions/addItem";
 
-import { CategoryType, ColorType, ItemType, LanguageStringType, MinOrderType, ModalContextType, PromoType, SizeType } from "@/types";
+import { CategoryType, ColorType, ItemType, LanguageStringType, MinOrderType, AddModalContextType, PromoType, SizeType } from "@/types";
 
 import AddModalForm from "./AddModalForm";
 import CategorySelector from "./CategorySelector";
@@ -20,7 +20,7 @@ import editItem from "@/actions/editItem";
 const ItemForm = () => {
   const navigate = useNavigate();
 
-  const { data, request } = useAddModalContext() as ModalContextType;
+  const { data, request } = useAddModalContext() as AddModalContextType;
   const currentData = data as ItemType;
   
   const [categories, setCategories] = useState<CategoryType[]>([]);

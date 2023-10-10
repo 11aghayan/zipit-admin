@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AddModalForm from "./AddModalForm";
-import useAddModalContext from "@/context/addModalContext/useAddModalContext";
+import useAddModalContext from "@/hooks/useAddModalContext";
 import { useNavigate } from "react-router-dom";
 import addCategory from "@/actions/addCategory";
 

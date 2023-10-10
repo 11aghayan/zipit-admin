@@ -1,7 +1,7 @@
-import { ModalContextType, ModalDataType, ModalVariantType, RequestType } from "@/types";
+import { AddModalContextType, ModalDataType, ModalVariantType, RequestType } from "@/types";
 import { createContext, useState } from "react";
 
-export const ModalContext = createContext<ModalContextType | null>(null);
+export const ModalContext = createContext<AddModalContextType | null>(null);
 
 type Props = {
   children: React.ReactNode;
@@ -25,7 +25,7 @@ const AddModalContextProvider = ({ children }: Props) => {
     setCurrentRequest(request);
   };
 
-  const value: ModalContextType = {
+  const value: AddModalContextType = {
     isOpen,
     toggleOpen,
     variant,

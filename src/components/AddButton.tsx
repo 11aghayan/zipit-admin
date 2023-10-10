@@ -1,4 +1,4 @@
-import useAddModalContext from "@/context/addModalContext/useAddModalContext";
+import useAddModalContext from "@/hooks/useAddModalContext";
 import { ModalVariantType } from "@/types";
 
 type Props = {

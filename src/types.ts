@@ -4,7 +4,7 @@ export type ModalDataType = ItemType | CategoryType | null;
 
 export type RequestType = 'post' | 'put';
 
-export type ModalContextType = {
+export type AddModalContextType = {
   isOpen: boolean;
   toggleOpen: () => void; 
   variant: ModalVariantType;
