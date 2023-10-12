@@ -3,21 +3,25 @@ import AddModalForm from "./AddModalForm";
 import useAddModalContext from "@/hooks/useAddModalContext";
 import { useNavigate } from "react-router-dom";
 import addCategory from "@/actions/addCategory";
+import { CategoryType, LanguageStringType } from "@/types";
+import editCategory from "@/actions/editCategory";
 
 const CategoryForm = () => {
-  const { request } = useAddModalContext();
+  const { data, request } = useAddModalContext();
+  const currentData = data as CategoryType || null;
+
   const navigate = useNavigate();
   
-  const [label, setLabel] = useState('');
+  const [label, setLabel] = useState<LanguageStringType>(currentData?.label || { am: '', ru: '' });
   const [errorMessage, setErrorMessage] = useState('');
 
   const onSubmit = () => {
-    if (!label) return setErrorMessage('No label provided');
+    if (!label.am) return setErrorMessage('No Armenian name provided');
+    if (!label.ru) return setErrorMessage('No Russian name provided');
     setErrorMessage('');
     
-    const body = { label };
-    
     if (request === 'post') {
+      const body = { label };
       addCategory(body)
         .then(res => {
           if (res.ok) {
@@ -27,7 +31,8 @@ const CategoryForm = () => {
           }
         });
     } else if (request === 'put') {
-      console.log('PUT Request');
+      const body = { label, items: currentData.items };
+      editCategory(body, currentData.id);
     } else {
       console.log('Unknown request type');
     }
@@ -38,16 +43,30 @@ const CategoryForm = () => {
       <AddModalForm
         submit={onSubmit}
       >
-        <label htmlFor="label">
-          Category Name
-        </label>
-        <input 
-          id="label"
-          type="text"
-          name="category-name"
-          value={label}
-          onChange={e => setLabel(e.target.value)}
-        />
+        <div>
+          <label htmlFor="label">
+            Category Name(AM)
+          </label>
+          <input 
+            id="label"
+            type="text"
+            name="category-name"
+            value={label.am}
+            onChange={e => setLabel(prev => ({...prev, am: e.target.value}))}
+          />
+        </div>
+        <div>
+          <label htmlFor="label">
+            Category Name(RU)
+          </label>
+          <input 
+            id="label"
+            type="text"
+            name="category-name"
+            value={label.ru}
+            onChange={e => setLabel(prev => ({ ...prev, ru: e.target.value }))}
+          />
+        </div>
         {errorMessage && <p className="text-red-600 text-lg font-medium text-center">{errorMessage}</p>}
       </AddModalForm>
     </div>

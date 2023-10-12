@@ -1,4 +1,5 @@
 import AddButton from "@/components/AddButton";
+import CategoriesList from "./components/CategoriesList";
 
 const Categories = () => {
   
@@ -8,6 +9,7 @@ const Categories = () => {
         label="Add Category"
         variant="category"
       />
+      <CategoriesList />
     </main>
   );
 };

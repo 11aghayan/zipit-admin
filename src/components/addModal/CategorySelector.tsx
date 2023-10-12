@@ -2,8 +2,8 @@ import { CategoryType } from "@/types";
 
 type Props = {
   categories: CategoryType[];
-  category: string;
-  setCategory: React.Dispatch<React.SetStateAction<string>>;
+  category: CategoryType;
+  setCategory: React.Dispatch<React.SetStateAction<CategoryType>>;
 };
 
 const CategorySelector = ({ categories, category, setCategory }: Props) => {
@@ -20,17 +20,18 @@ const CategorySelector = ({ categories, category, setCategory }: Props) => {
           <select 
             name="category"
             className="capitalize"
-            defaultValue={category}
-            onChange={e => setCategory(e.currentTarget.value)}
+            defaultValue={JSON.stringify(category)}
+            onChange={e => setCategory(JSON.parse(e.currentTarget.value))
+            }
           >
             {
               categories.map(c => (
                 <option 
-                  key={c.label}
-                  value={c.label}
+                  key={c.label.am}
+                  value={JSON.stringify(c)}
                   className="capitalize"
                 >
-                  {c.label}
+                  {c.label.am}
                 </option>
               ))
             }

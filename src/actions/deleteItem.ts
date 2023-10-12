@@ -1,6 +1,6 @@
 import axios from '@/libs/axios';
 
-export default async function deleteItem(id: number) {
+export default async function deleteItem(id: string) {
   try {
     await axios.delete(`/items/${id}`);
     return { ok: true };

@@ -26,7 +26,7 @@ const ItemForm = () => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const strCategories = JSON.stringify(categories);
 
-  const [category, setCategory] = useState(currentData?.category || categories[0]?.label);
+  const [category, setCategory] = useState<CategoryType>(currentData?.category || categories[0]);
   const [name, setName] = useState<LanguageStringType>(currentData?.name || {am: '', ru: ''});
   const [price, setPrice] = useState(currentData?.price || 0);
   const [promo, setPromo] = useState<PromoType>(currentData?.promo || null);
@@ -34,14 +34,14 @@ const ItemForm = () => {
   const [minOrder, setMinOrder] = useState<MinOrderType>(currentData?.minOrder || {qty: 0, unit: 'pcs'});
   const [colors, setColors] = useState<ColorType[]>(currentData?.colors || []);
   const [description, setDescription] = useState<LanguageStringType>(currentData?.description || {am: '', ru: ''});
-
+  
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   useEffect(() => {
     getAllCategories()
       .then(data => {
         setCategories(data);
-        if (!category) setCategory(data[0]?.label);
+        if (!category) setCategory(data[0]);
       });
   }, [strCategories, category]);
   
@@ -69,6 +69,7 @@ const ItemForm = () => {
     };
 
     if (request === 'post') {
+      console.log(body);
       addItem(body)
         .then(res => {
           if (res.ok) {
@@ -78,7 +79,7 @@ const ItemForm = () => {
           }
         });
     } else if (request === 'put') {
-      editItem(body, data!.id)
+      editItem(body, data?.id as string)
         .then(res => {
           if (res.ok) {
             navigate(0);

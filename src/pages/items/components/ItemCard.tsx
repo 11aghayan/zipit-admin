@@ -36,9 +36,14 @@ const ItemCard = ({
         className="mx-auto"
         loading="lazy"
       />
-      <h3 className="text-gray-900 text-lg text-center capitalize">
-        {category}
-      </h3>
+      <div className="text-gray-900 text-lg text-center capitalize">
+        <h3>
+          {category.label.am}
+        </h3>
+        <h3>
+          {category.label.ru}
+        </h3>
+      </div>
       <div className="flex gap-2 justify-center">
         <h3 className="text-gray-900 text-xl font-medium border-r border-gray-900 pr-2">
           {name.am}

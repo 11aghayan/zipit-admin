@@ -13,7 +13,7 @@ const ItemsList = () => {
       getAllItems()
       .then(data => setItems(data));
   }, [stringItems]);
-
+  
   return (
     <div className="
         flex

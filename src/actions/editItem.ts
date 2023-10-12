@@ -1,7 +1,7 @@
 import axios from '@/libs/axios';
 import { ItemType } from '@/types';
 
-export default async function editItem(body: Omit<ItemType, 'id'>, id: number) {
+export default async function editItem(body: Omit<ItemType, 'id'>, id: string) {
   try {
     await axios.put(`/items/${id}`, body);
     return { ok: true };

@@ -16,14 +16,14 @@ export type AddModalContextType = {
 };
 
 export type CategoryType = {
-  id: number;
-  label: string;
-  items: ItemType[]
+  id: string;
+  label: LanguageStringType;
+  itemQty: number
 };
 
 export type ItemType = {
-  id: number;
-  category: string;
+  id: string;
+  category: CategoryType;
   name: LanguageStringType;
   price: number;
   promo: PromoType;
