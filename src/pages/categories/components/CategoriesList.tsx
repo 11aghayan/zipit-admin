@@ -17,10 +17,12 @@ const CategoriesList = () => {
   return (
     <section className="mt-10 space-y-2">
       {
-        categories.map(({ id, label }) => (
+        categories.map(({ id, label, itemsQty }) => (
           <CategoryCard 
             key={id}
             label={label} 
+            itemsQty={itemsQty}
+            id={id}
           />
         ))
       }

@@ -1,8 +1,8 @@
 import axios from '@/libs/axios';
 
-import { CategoryType } from "@/types";
+import { LanguageStringType } from "@/types";
 
-export default async function editCategory(body: Omit<CategoryType, 'id'>, id: string) {
+export default async function editCategory(body: LanguageStringType, id: string) {
   try {
     await axios.put(`/categories/${id}`, body);
     return { ok: true };

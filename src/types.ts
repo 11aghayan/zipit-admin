@@ -18,7 +18,7 @@ export type AddModalContextType = {
 export type CategoryType = {
   id: string;
   label: LanguageStringType;
-  itemQty: number
+  itemsQty: number
 };
 
 export type ItemType = {

@@ -1,21 +1,27 @@
-import { LanguageStringType } from "@/types";
-import Buttons from "./Buttons";
+import ChangeDeleteButtons from "@/components/ChangeDeleteButtons";
+import { CategoryType } from "@/types";
 
-type Props = {
-  label: LanguageStringType;
-};
+type Props = CategoryType;
 
-const CategoryCard = ({ label }: Props) => {
+const CategoryCard = ({ label, itemsQty, id }: Props) => {
   
 
   return (
     <article className="w-full flex justify-between bg-gray-300 rounded-full p-4">
-      <div className="flex gap-2 text-gray-900 text-xl font-medium">
+      <div className="flex gap-2 text-gray-900 text-md sm:text-xl font-medium">
         <h3 className="border-r pr-2 border-gray-900">{label.am}</h3>
-        <h3>{label.ru}</h3>
+        <h3 className="border-r pr-2 border-gray-900">{label.ru}</h3>
+        <p>{itemsQty}</p>
       </div>
       <div>
-        <Buttons />
+        <ChangeDeleteButtons 
+          data={{
+            label,
+            itemsQty,
+            id
+          }}
+          variant='category'
+        />
       </div>
     </article>
   );

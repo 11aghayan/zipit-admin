@@ -1,14 +1,15 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import cn from "@/utils/cn";
+import { ModalVariantType } from '@/types';
 
-import { useState } from 'react';
 
 type Props = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onDelete: () => Promise<{ok: boolean}>;
-  variant: 'category' | 'item';
+  variant: ModalVariantType;
 };
 
 const DeleteModal = ({ isOpen, setIsOpen, onDelete, variant }: Props) => {
@@ -23,7 +24,7 @@ const DeleteModal = ({ isOpen, setIsOpen, onDelete, variant }: Props) => {
     if (res.ok) {
       navigate(0);
     } else {
-      setErrorMessage(`Something went wrong. ${<p className='capitalize'>{variant}</p>} not deleted`);
+      setErrorMessage(`Something went wrong. ${variant && (variant[0].toUpperCase() + variant.slice(1))} not deleted`);
     }
   };
   

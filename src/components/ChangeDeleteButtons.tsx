@@ -3,20 +3,24 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icon, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import useAddModalContext from '@/hooks/useAddModalContext';
-import { ItemType } from '@/types';
+import { CategoryType, ItemType, ModalVariantType } from '@/types';
 import DeleteModal from '@/components/DeleteModal';
 import deleteItem from '@/actions/deleteItem';
+import deleteCategory from '@/actions/deleteCategory';
 
 type Props = {
-  data: ItemType;
+  data: ItemType | CategoryType;
+  variant: ModalVariantType
 }
 
-const Buttons = ({ data }: Props) => {
+const ChangeDeleteButtons = ({ data, variant }: Props) => {
   const { toggleOpen: toggleAdd, setVariant, setData, setRequest } = useAddModalContext();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const deleteFunc = async () => {
-    return await deleteItem(data.id);
+    if (variant === 'item') return await deleteItem(data.id);
+    if (variant === 'category') return await deleteCategory(data.id);
+    return { ok: false };
   };
   
 
@@ -26,7 +30,7 @@ const Buttons = ({ data }: Props) => {
 
   const handleChange = () => {
     setData(data);
-    setVariant('item');
+    setVariant(variant);
     setRequest('put');
     toggleAdd();
   };
@@ -39,11 +43,11 @@ const Buttons = ({ data }: Props) => {
           isOpen={isDeleteModalOpen} 
           setIsOpen={setIsDeleteModalOpen}
           onDelete={deleteFunc}
-          variant='item'
+          variant={variant}
         />
       }
       <div
-        className='flex gap-3 justify-between border-t border-gray-900 pt-1 mt-2'
+        className='flex gap-3 justify-between'
       >
         <button
           type="button"
@@ -64,4 +68,4 @@ const Buttons = ({ data }: Props) => {
   );
 };
 
-export default Buttons;
+export default ChangeDeleteButtons;

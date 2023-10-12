@@ -31,8 +31,14 @@ const CategoryForm = () => {
           }
         });
     } else if (request === 'put') {
-      const body = { label, items: currentData.items };
-      editCategory(body, currentData.id);
+      editCategory(label, currentData.id)
+          .then(res => {
+            if (res.ok) {
+              navigate(0);
+            } else {
+              setErrorMessage('Something went wrong');
+            }
+          });
     } else {
       console.log('Unknown request type');
     }

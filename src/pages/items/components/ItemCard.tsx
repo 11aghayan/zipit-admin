@@ -1,6 +1,5 @@
 import type { ItemType } from "@/types";
-
-import Buttons from "./Buttons";
+import ChangeDeleteButtons from "@/components/ChangeDeleteButtons";
 
 const ItemCard = ({ 
   name, 
@@ -84,7 +83,7 @@ const ItemCard = ({
           ))
         }
       </div>
-      <div className="text-gray-900 text-md space-y-1 pt-3">
+      <div className="text-gray-900 text-md space-y-1 py-3 border-b border-gray-900">
         <p>
           {description.am}
         </p>
@@ -92,7 +91,7 @@ const ItemCard = ({
           {description.ru}
         </p>
       </div>
-      <Buttons 
+      <ChangeDeleteButtons
         data={{ 
           name, 
           id,
@@ -104,6 +103,7 @@ const ItemCard = ({
           promo, 
           size 
         }}
+        variant='item'
       />
     </article>
   );
