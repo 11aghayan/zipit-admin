@@ -33,6 +33,11 @@ export type ItemType = {
   description: LanguageStringType;
 };
 
+export type ItemResponseType = {
+  items: ItemType[];
+  length: number;
+}
+
 export type ColorType = {
   color: string;
   qty: number;

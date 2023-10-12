@@ -1,11 +1,13 @@
 import axios from '@/libs/axios';
+import { ItemResponseType } from '@/types';
 
 export default async function getAllItems() {
   try {
-    const { data } = await axios.get('/admin/items');
+    const res = await axios.get('/admin/items');
+    const data = res.data as ItemResponseType;
     return data;
   } catch(err) {
     console.log(err);
-    return [];
+    return {items: [], length: 0};
   }
 }

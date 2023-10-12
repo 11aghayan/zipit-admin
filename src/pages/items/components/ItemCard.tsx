@@ -35,7 +35,7 @@ const ItemCard = ({
         className="mx-auto"
         loading="lazy"
       />
-      <div className="text-gray-900 text-lg text-center capitalize">
+      <div className="text-orange-600 font-semibold text-lg text-center capitalize">
         <h3>
           {category.label.am}
         </h3>

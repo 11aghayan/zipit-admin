@@ -11,7 +11,7 @@ const ItemsList = () => {
 
   useEffect(() => {
       getAllItems()
-      .then(data => setItems(data));
+      .then(data => setItems(data.items));
   }, [stringItems]);
   
   return (
