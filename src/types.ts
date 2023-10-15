@@ -36,6 +36,7 @@ export type ItemType = {
 export type ItemResponseType = {
   items: ItemType[];
   length: number;
+  pages: number;
 }
 
 export type ColorType = {

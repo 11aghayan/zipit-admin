@@ -1,29 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import { ItemType } from "@/types";
+import getAllItems from "@/actions/getAllItems";
+import { ItemResponseType, ItemType } from "@/types";
 
 import ItemCard from "./ItemCard";
-import getAllItems from "@/actions/getAllItems";
-import { useSearchParams } from "react-router-dom";
 
-const ItemsList = () => {
-  const [sp, setSp] = useSearchParams();
-  
-  const [items, setItems] = useState<ItemType[]>([]);
-  const stringItems = JSON.stringify(items);
+type Props = {
+  items: ItemType[];
+  setItems: React.Dispatch<React.SetStateAction<ItemResponseType | null>>;
+};
+
+const ItemsList = ({ items, setItems }: Props) => {
 
   useEffect(() => {
-      if (!sp.get('page')) {
-        setSp(prev => (
-          {
-            ...prev,
-            page: 1
-          }
-        ));
-      }
-      getAllItems()
-      .then(data => setItems(data.items));
-  }, [stringItems, setSp, sp]);
+    getAllItems()
+    .then(data => setItems(data));
+  }, [setItems]);
   
   return (
     <div className="

@@ -11,6 +11,6 @@ export default async function getAllItems() {
     return data;
   } catch(err) {
     console.log(err);
-    return {items: [], length: 0};
+    return { items: [], length: 0, pages: 0 };
   }
 }
