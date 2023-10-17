@@ -29,8 +29,13 @@ export type ItemType = {
   promo: PromoType;
   size: SizeType;
   minOrder: MinOrderType;
-  colors: ColorType[];
+  photos: PhotoType[];
   description: LanguageStringType;
+};
+
+export type PhotoType = {
+  photo: string;
+  qty: number;
 };
 
 export type ItemResponseType = {
@@ -38,11 +43,6 @@ export type ItemResponseType = {
   length: number;
   pages: number;
 }
-
-export type ColorType = {
-  color: string;
-  qty: number;
-};
 
 export type LanguageStringType = {
   am: string;
@@ -54,7 +54,7 @@ export type MinOrderType = {
   unit: MinOrderUnitType;
 };
 
-export type MinOrderUnitType = 'pcs' | 'cm' | 'box';
+export type MinOrderUnitType = 'pcs' | 'cm' | 'box' | 'roll';
 
 export type SizeType = {
   val: number;

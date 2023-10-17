@@ -15,7 +15,10 @@ input[type='email'],
 input[type='password'],
 input[type='number'],
 textarea,
-select
- {
+select {
   @apply mt-1 text-lg text-gray-900 font-normal px-2 py-1 w-full border border-gray-500 rounded-md;
+}
+
+input[type='file']::-webkit-file-upload-button {
+  @apply cursor-pointer;
 }

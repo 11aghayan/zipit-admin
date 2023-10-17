@@ -4,12 +4,12 @@ import ChangeDeleteButtons from "@/components/ChangeDeleteButtons";
 const ItemCard = ({ 
   name, 
   id,
-  category, 
-  colors, 
+  category,
   description, 
   minOrder, 
   price, 
   promo, 
+  photos,
   size 
 }: ItemType) => {
 
@@ -27,14 +27,6 @@ const ItemCard = ({
         max-w-[280px]
       "
     >
-      <img 
-        src="https://fakeimg.pl/600x400" 
-        alt="placeholder" 
-        width='200'
-        height='200'
-        className="mx-auto"
-        loading="lazy"
-      />
       <div className="text-orange-600 font-semibold text-lg text-center capitalize">
         <h3>
           {category.label.am}
@@ -65,24 +57,6 @@ const ItemCard = ({
       </p>
       <p className="text-gray-900 text-lg text-center">Size: {size.val} {size.unit}</p>
       <p className="text-gray-900 text-lg text-center capitalize">Min Order: {minOrder.qty} {minOrder.unit}</p>
-      <div className="flex gap-1 flex-wrap justify-center">
-        {
-          colors.map(c => (
-            <div 
-              key={c.color}
-              className="flex flex-col items-center"
-            >
-              <div 
-                className="w-9 aspect-square rounded-full border-2 border-black"
-                style={{
-                  backgroundColor: c.color
-                }}
-              />
-              <p className="text-gray-900 text-lg">{c.qty}</p>
-            </div>
-          ))
-        }
-      </div>
       <div className="text-gray-900 text-md space-y-1 py-3 border-b border-gray-900">
         <p>
           {description.am}
@@ -95,12 +69,12 @@ const ItemCard = ({
         data={{ 
           name, 
           id,
-          category, 
-          colors, 
+          category,
           description, 
           minOrder, 
           price, 
           promo, 
+          photos,
           size 
         }}
         variant='item'

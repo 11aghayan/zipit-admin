@@ -1,11 +1,12 @@
-type Props = {
-  addQty: (color:string, qty: number) => void;
-  color: string;
-};
-
-const Quantity = ({ addQty, color }: Props) => {
+const Quantity = () => {
   return (
-    <div>
+    <div className="text-gray-900">
+      <label 
+        htmlFor="qty"
+        className="block"
+      >
+        Qty
+      </label>
       <input 
         name="qty"
         id="qty"
@@ -16,8 +17,6 @@ const Quantity = ({ addQty, color }: Props) => {
         placeholder="Quantity"
         min={0}
         defaultValue={0}
-        onChange={e => addQty(color, Number(e.currentTarget.value))
-        }
       />
     </div>
   );

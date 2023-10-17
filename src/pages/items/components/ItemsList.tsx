@@ -32,11 +32,11 @@ const ItemsList = ({ items, setItems }: Props) => {
           id,
           name,
           category,
-          colors,
           description,
           minOrder,
           price,
           promo,
+          photos,
           size
         }) => (
           <ItemCard 
@@ -44,11 +44,11 @@ const ItemsList = ({ items, setItems }: Props) => {
             id={id}
             name={name}
             category={category}
-            colors={colors}
             description={description}
             minOrder={minOrder}
             price={price}
             promo={promo}
+            photos={photos}
             size={size}
           />
         ))

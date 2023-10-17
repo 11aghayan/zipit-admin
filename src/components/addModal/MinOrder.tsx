@@ -35,6 +35,7 @@ const MinOrder = ({ minOrder, setMinOrder }: Props) => {
           <option value="pcs">Pcs</option>
           <option value="cm">Cm</option>
           <option value="box">Box</option>
+          <option value="box">Roll</option>
         </select>
       </div>
     </div>

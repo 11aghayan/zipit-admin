@@ -5,17 +5,17 @@ import getAllCategories from "@/actions/getAllCategories";
 import useAddModalContext from "@/hooks/useAddModalContext";
 import addItem from "@/actions/addItem";
 
-import { CategoryType, ColorType, ItemType, LanguageStringType, MinOrderType, AddModalContextType, PromoType, SizeType } from "@/types";
+import { CategoryType, ItemType, LanguageStringType, MinOrderType, AddModalContextType, PromoType, SizeType, PhotoType } from "@/types";
 
 import AddModalForm from "./AddModalForm";
 import CategorySelector from "./CategorySelector";
-import ColorPicker from "./ColorPicker";
 import Name from "./Name";
 import Description from "./Description";
 import MinOrder from "./MinOrder";
 import Promo from "./Promo";
 import Size from "./Size";
 import editItem from "@/actions/editItem";
+import Photos from "./photos/Photos";
 
 const ItemForm = () => {
   const navigate = useNavigate();
@@ -24,7 +24,6 @@ const ItemForm = () => {
   const currentData = data as ItemType;
   
   const [categories, setCategories] = useState<CategoryType[]>([]);
-  const strCategories = JSON.stringify(categories);
 
   const [category, setCategory] = useState<CategoryType>(currentData?.category || categories[0]);
   const [name, setName] = useState<LanguageStringType>(currentData?.name || {am: '', ru: ''});
@@ -32,18 +31,18 @@ const ItemForm = () => {
   const [promo, setPromo] = useState<PromoType>(currentData?.promo || null);
   const [size, setSize] = useState<SizeType>(currentData?.size || {val: 0, unit: 'cm'});
   const [minOrder, setMinOrder] = useState<MinOrderType>(currentData?.minOrder || {qty: 0, unit: 'pcs'});
-  const [colors, setColors] = useState<ColorType[]>(currentData?.colors || []);
+  const [photos, setPhotos] = useState<PhotoType[]>(currentData?.photos || []);
   const [description, setDescription] = useState<LanguageStringType>(currentData?.description || {am: '', ru: ''});
   
   const [errorMessage, setErrorMessage] = useState<string>('');
-
+  
   useEffect(() => {
     getAllCategories()
       .then(data => {
         setCategories(data);
         if (!category) setCategory(data[0]);
       });
-  }, [strCategories, category]);
+  }, [categories.length, category]);
   
   const onSubmit = () => {
     if (!category) return setErrorMessage('Category not provided');
@@ -53,7 +52,7 @@ const ItemForm = () => {
     if (promo !== null && promo < 0) return setErrorMessage('Promo cannot be a negative number');
     if (size === undefined) return setErrorMessage('Size not provided');
     if (minOrder.qty < 1) return setErrorMessage('Min order must be number bigger than 0');
-    if (!colors.length) return setErrorMessage('Pick at least one color');
+    if (!photos.length) return setErrorMessage('No Photos Provided');
 
     setErrorMessage('');
     
@@ -63,9 +62,9 @@ const ItemForm = () => {
       price,
       promo,
       size,
-      colors,
       description,
-      minOrder
+      minOrder,
+      photos
     };
 
     if (request === 'post') {
@@ -130,9 +129,9 @@ const ItemForm = () => {
         minOrder={minOrder}
         setMinOrder={setMinOrder}
       />
-      <ColorPicker 
-        colors={colors}
-        setColors={setColors}
+      <Photos 
+        photos={photos}
+        setPhotos={setPhotos}
       />
       <Description 
         description={description}
