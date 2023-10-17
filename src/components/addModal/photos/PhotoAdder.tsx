@@ -15,11 +15,12 @@ const PhotoAdder = ({ setPhotos }: Props) => {
 
     const fileObj = {
       qty: 0,
-      photo: image
+      src: image,
+      color: ''
     }; 
 
     setPhotos(prev => {
-      const photoInPhotos = prev.find(p => p.photo === fileObj.photo);
+      const photoInPhotos = prev.find(p => p.src === fileObj.src);
       if (photoInPhotos) return prev;
       return [...prev, fileObj];
     });
@@ -32,7 +33,6 @@ const PhotoAdder = ({ setPhotos }: Props) => {
     
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    
     reader.onload = () => {
       setImage(reader.result as string);
     };

@@ -1,26 +1,34 @@
 import Quantity from "@/components/addModal/Quantity";
 import ColorName from "../ColorName";
+import { PhotoType } from "@/types";
 
 type Props = {
-  src: string;
+  photo: PhotoType;
+  setPhotos: React.Dispatch<React.SetStateAction<PhotoType[]>>;
 }
 
-const EachPhoto = ({ src }: Props) => {
+const EachPhoto = ({ photo, setPhotos }: Props) => {
 
   return (
     <div
-      key={src}
+      key={photo.src}
       className="flex items-center gap-2 p-2 border-b border-gray-900"
     >
       <img 
-        src={src} 
+        src={photo.src} 
         alt="Item Photo" 
         width={100}
         className="rounded-xl border-2 border-gray-900 aspect-square"
       />
       <div className="space-y-3">
-        <ColorName />
-        <Quantity />
+        <ColorName 
+          photo={photo}
+          setPhotos={setPhotos}
+        />
+        <Quantity 
+          photo={photo}
+          setPhotos={setPhotos}
+        />
       </div>
     </div>
   );

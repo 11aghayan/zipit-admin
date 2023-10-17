@@ -34,8 +34,9 @@ export type ItemType = {
 };
 
 export type PhotoType = {
-  photo: string;
+  src: string;
   qty: number;
+  color: string;
 };
 
 export type ItemResponseType = {

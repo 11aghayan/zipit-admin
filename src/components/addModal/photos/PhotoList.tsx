@@ -2,18 +2,19 @@ import { PhotoType } from "@/types";
 import Photo from "./Photo";
 
 type Props = {
-  photos: PhotoType[]
+  photos: PhotoType[];
+  setPhotos: React.Dispatch<React.SetStateAction<PhotoType[]>>;
 }
 
-const PhotoList = ({ photos }: Props) => {
-  console.log(photos);
+const PhotoList = ({ photos, setPhotos }: Props) => {
   return (
     <div className="flex flex-col gap-2">
       {
         photos.map((p) => (
           <Photo 
-            key={p.photo}
-            src={p.photo}
+            key={p.src}
+            photo={p}
+            setPhotos={setPhotos}
           />
         ))
         }

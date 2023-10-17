@@ -13,6 +13,7 @@ const Photos = ({ photos, setPhotos }: Props) => {
     <section>
       <PhotoList 
         photos={photos}
+        setPhotos={setPhotos}
       />
       <PhotoAdder 
         setPhotos={setPhotos}

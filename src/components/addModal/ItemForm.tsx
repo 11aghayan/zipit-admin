@@ -68,7 +68,6 @@ const ItemForm = () => {
     };
 
     if (request === 'post') {
-      console.log(body);
       addItem(body)
         .then(res => {
           if (res.ok) {
