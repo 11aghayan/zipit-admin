@@ -22,6 +22,8 @@ const ItemForm = () => {
 
   const { data, request } = useAddModalContext() as AddModalContextType;
   const currentData = data as ItemType;
+
+  const [isLoading, setIsLoading] = useState(false);
   
   const [categories, setCategories] = useState<CategoryType[]>([]);
 
@@ -45,6 +47,8 @@ const ItemForm = () => {
   }, [categories.length, category]);
   
   const onSubmit = () => {
+    setIsLoading(true);
+    
     if (!category) return setErrorMessage('Category not provided');
     if (!name.am) return setErrorMessage('Name(AM) not provided');
     if (!name.ru) return setErrorMessage('Name(RU) not provided');
@@ -75,7 +79,8 @@ const ItemForm = () => {
           } else {
             setErrorMessage('Something went wrong');
           }
-        });
+        })
+        .finally(() => setIsLoading(false));
     } else if (request === 'put') {
       editItem(body, data?.id as string)
         .then(res => {
@@ -84,8 +89,11 @@ const ItemForm = () => {
           } else {
             setErrorMessage('Something went wrong');
           }
-        });
+        })
+        .finally(() => setIsLoading(false));
     } else {
+      setIsLoading(false);
+      setErrorMessage('Unknown request type');
       console.log('Unknown request type');
     }
   };
@@ -93,6 +101,7 @@ const ItemForm = () => {
   return (
     <AddModalForm
       submit={onSubmit}
+      isLoading={isLoading}
     >
       <CategorySelector 
         categories={categories}

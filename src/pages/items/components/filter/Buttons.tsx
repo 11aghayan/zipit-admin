@@ -16,7 +16,7 @@ const Buttons = ({ setIsOpen }: Props) => {
         Cancel
       </button>
       <button
-        className={`${commonStyles} bg-orange-400 text-white`}
+        className={`${commonStyles} bg-orange-400 text-white hover:brightness-110`}
       >
         Filter
       </button>

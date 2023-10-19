@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 
 import getAllItems from "@/actions/getAllItems";
-import { ItemResponseType, ItemType } from "@/types";
+import { ItemResponseType } from "@/types";
 
 import ItemCard from "./ItemCard";
+import TextLoader from "@/components/loader/TextLoader";
 
 type Props = {
-  items: ItemType[];
+  items: ItemResponseType | null;
   setItems: React.Dispatch<React.SetStateAction<ItemResponseType | null>>;
 };
 
@@ -14,11 +15,13 @@ const ItemsList = ({ items, setItems }: Props) => {
 
   useEffect(() => {
     getAllItems()
-    .then(data => setItems(data));
+    .then(data => {
+      setItems(data);
+    });
   }, [setItems]);
   
   return (
-    <div className="
+    <section className="
         flex
         flex-wrap
         gap-4
@@ -27,8 +30,17 @@ const ItemsList = ({ items, setItems }: Props) => {
       "
     >
       {
-        items.length ?
-        items.map(({
+        !items
+        ?
+        <TextLoader
+          size={1}
+        />
+        :
+        !items.length
+        ?
+        <p className="text-gray-900 text-center text-lg mx-auto">No Items</p>
+        :
+        items.items.map(({
           id,
           name,
           category,
@@ -52,10 +64,8 @@ const ItemsList = ({ items, setItems }: Props) => {
             size={size}
           />
         ))
-        :
-        <p>No items to show</p>
       }
-    </div>
+    </section>
   );
 };
 

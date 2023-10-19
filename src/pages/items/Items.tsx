@@ -27,15 +27,15 @@ const Items = () => {
           setIsOpen={setIsFilterOpen}
         />
       </section>
-      <section className="pt-5">
-        <ItemsList 
-          items={items?.items || []}
-          setItems={setItems}
+        <section className="pt-5">
+          <ItemsList 
+            items={items}
+            setItems={setItems}
+          />
+        </section>
+        <PagesList 
+          pages={items?.pages || 0}
         />
-      </section>
-      <PagesList 
-        pages={items?.pages || 0}
-      />
     </main>
   );
 };

@@ -3,9 +3,10 @@ import AddModalButtons from "./AddModalButtons";
 type Props = {
   children: React.ReactNode;
   submit: () => void;
+  isLoading: boolean;
 };
 
-const AddModalForm = ({ children, submit }: Props) => {
+const AddModalForm = ({ children, submit, isLoading }: Props) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,7 +31,9 @@ const AddModalForm = ({ children, submit }: Props) => {
       onSubmit={handleSubmit}
     >
         { children }
-        <AddModalButtons />
+        <AddModalButtons 
+          isLoading={isLoading}
+        />
       </form>
   );
 };
