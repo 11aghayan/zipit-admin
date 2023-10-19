@@ -7,34 +7,54 @@ type Props = {
 
 const ColorName = ({ photo, setPhotos }: Props) => {
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, lang: 'am' | 'ru') => {
     const color = e.target.value;
-    
+
     setPhotos(prev => prev.map(p => {
       if (p.src === photo.src) {
-        return {...p, color}; 
+        return {...p, color: {
+          ...p.color,
+          [lang]: color
+        }}; 
       } else {
         return p;
       }
     }));
+    
   };
   
   return (
     <div className="text-gray-900">
-      <label 
-        htmlFor="color"
-        className="block"
-      >
-        Color Name
-      </label>
-      <input 
-        name="color"
-        id="color"
-        type="text"
-        placeholder="e.g. Silver, Gold, Black"
-        defaultValue={photo.color}
-        onChange={handleChange}
-      />
+      <div>
+        <label 
+          htmlFor="color"
+          className="block"
+        >
+          Color Name(AM)
+        </label>
+        <input 
+          name="colorAm"
+          id="colorAm"
+          type="text"
+          defaultValue={photo.color.am}
+          onChange={e => handleChange(e, 'am')}
+        />
+      </div>
+      <div>
+        <label 
+          htmlFor="color"
+          className="block"
+        >
+          Color Name(RU)
+        </label>
+        <input 
+          name="colorRu"
+          id="colorRu"
+          type="text"
+          defaultValue={photo.color.ru}
+          onChange={e => handleChange(e, 'ru')}
+        />
+      </div>
     </div>
   );
 };

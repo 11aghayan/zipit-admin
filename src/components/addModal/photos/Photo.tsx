@@ -1,6 +1,10 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+
 import Quantity from "@/components/addModal/Quantity";
-import ColorName from "../ColorName";
 import { PhotoType } from "@/types";
+
+import ColorName from "@/components/addModal/ColorName";
 
 type Props = {
   photo: PhotoType;
@@ -9,17 +13,23 @@ type Props = {
 
 const EachPhoto = ({ photo, setPhotos }: Props) => {
 
+  const handleDelete = () => {
+    setPhotos(prev => prev.filter(p => p.src !== photo.src));
+  };
+
   return (
     <div
       key={photo.src}
-      className="flex items-center gap-2 p-2 border-b border-gray-900"
+      className="relative flex items-start gap-2 p-2 border-b border-gray-900"
     >
-      <img 
-        src={photo.src} 
-        alt="Item Photo" 
-        width={100}
-        className="rounded-xl border-2 border-gray-900 aspect-square"
-      />
+      <div>
+        <img 
+          src={photo.src} 
+          alt="Item Photo" 
+          width={100}
+          className="rounded-xl border-2 border-gray-900 aspect-square"
+        />
+      </div>
       <div className="space-y-3">
         <ColorName 
           photo={photo}
@@ -30,6 +40,13 @@ const EachPhoto = ({ photo, setPhotos }: Props) => {
           setPhotos={setPhotos}
         />
       </div>
+      <button 
+        type="button"
+        className="hover:bg-gray-200 p-1 rounded-md text-2xl absolute right-1 bottom-1 text-red-600"
+        onClick={handleDelete}
+      >
+        <FontAwesomeIcon icon={solid('trash')} />
+      </button>
     </div>
   );
 };

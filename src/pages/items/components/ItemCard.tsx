@@ -1,6 +1,15 @@
 import type { ItemType } from "@/types";
 import ChangeDeleteButtons from "@/components/ChangeDeleteButtons";
 
+import PhotoList from "./photos/PhotoList";
+import CategoryLabel from "./CategoryLabel";
+import ItemName from "./ItemName";
+import Promo from "./Promo";
+import SizeAndMinOrder from "./SizeAndMinOrder";
+import Description from "./Description";
+import { useState } from "react";
+import SelectedPhoto from "./SelectedPhoto";
+
 const ItemCard = ({ 
   name, 
   id,
@@ -12,6 +21,7 @@ const ItemCard = ({
   photos,
   size 
 }: ItemType) => {
+  const [selectedPhoto, setSelectedPhoto] = useState(photos[0]?.src || '');
 
   return (
     <article
@@ -23,48 +33,35 @@ const ItemCard = ({
         p-2
         rounded-xl
         shadow-md
-        w-full
-        max-w-[280px]
+        w-fit
       "
     >
-      <div className="text-orange-600 font-semibold text-lg text-center capitalize">
-        <h3>
-          {category.label.am}
-        </h3>
-        <h3>
-          {category.label.ru}
-        </h3>
-      </div>
-      <div className="flex gap-2 justify-center">
-        <h3 className="text-gray-900 text-xl font-medium border-r border-gray-900 pr-2">
-          {name.am}
-        </h3>
-        <h3 className="text-gray-900 text-xl font-medium">
-          {name.ru}
-        </h3>
-      </div>  
-      <p className="text-gray-900 text-lg text-center">
-        {
-          promo
-          ?
-          <>
-            <span className="line-through">{price}</span>
-            <span> / {promo} AMD</span>
-          </>
-          :
-          <span>{price} AMD</span>
-        }
-      </p>
-      <p className="text-gray-900 text-lg text-center">Size: {size.val} {size.unit}</p>
-      <p className="text-gray-900 text-lg text-center capitalize">Min Order: {minOrder.qty} {minOrder.unit}</p>
-      <div className="text-gray-900 text-md space-y-1 py-3 border-b border-gray-900">
-        <p>
-          {description.am}
-        </p>
-        <p>
-          {description.ru}
-        </p>
-      </div>
+      <SelectedPhoto 
+        selectedPhoto={selectedPhoto}
+        photos={photos}
+      />
+      <CategoryLabel 
+        category={category}
+      />
+      <ItemName 
+        name={name}
+      />  
+      <Promo 
+        promo={promo}
+        price={price}
+      />
+      <SizeAndMinOrder 
+        size={size}
+        minOrder={minOrder}
+      />
+      <PhotoList 
+        photos={photos}
+        setSelectedPhoto={setSelectedPhoto}
+        selectedPhoto={selectedPhoto}
+      />
+      <Description 
+        description={description}
+      />
       <ChangeDeleteButtons
         data={{ 
           name, 
