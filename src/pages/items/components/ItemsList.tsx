@@ -26,7 +26,6 @@ const ItemsList = ({ items, setItems }: Props) => {
         flex-wrap
         gap-4
         justify-center
-        md:justify-start
       "
     >
       {

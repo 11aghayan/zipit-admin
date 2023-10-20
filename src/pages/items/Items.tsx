@@ -13,8 +13,8 @@ const Items = () => {
   const [items, setItems] = useState<ItemResponseType | null>(null);
 
   return (
-    <main className="relative">
-      <section className="relative flex w-full items-center justify-between gap-2">
+    <main>
+      <section className="flex w-full items-center justify-between gap-2">
         <FiltersModal 
           isOpen={isFilterOpen}
           setIsOpen={setIsFilterOpen}

@@ -34,7 +34,7 @@ const PagesList = ({ pages }: Props) => {
   };
 
   return (
-    <section className="absolute flex items-center gap-2 top-full mt-10 left-1/2 -translate-x-1/2 w-fit">
+    <section className="flex justify-center items-center gap-2 top-full mt-10">
       <PageButton
         handleClick={handlePrev}
         isActive={page > 1}

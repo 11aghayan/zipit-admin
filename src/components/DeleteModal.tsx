@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import cn from "@/utils/cn";
-import { ModalVariantType } from '@/types';
+import { ModalVariantType, ResponseType } from '@/types';
+import Loader from '@/components/loader/Loader';
 
 
 type Props = {
@@ -14,17 +15,24 @@ type Props = {
 
 const DeleteModal = ({ isOpen, setIsOpen, onDelete, variant }: Props) => {
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const buttonCommonStyles = 'font-medium text-xl rounded-lg pb-[2px] px-4 hover:opacity-80';
+  const buttonCommonStyles = 'w-22 h-10 font-medium text-xl rounded-lg pb-[2px] px-4 hover:opacity-80 disabled:hover:opacity-100';
 
   const handleDelete = async () => {
-    const res = await onDelete();
+    setIsLoading(true);
 
-    if (res.ok) {
-      navigate(0);
-    } else {
-      setErrorMessage(`Something went wrong. ${variant && (variant[0].toUpperCase() + variant.slice(1))} not deleted`);
+    try {
+      const res = await onDelete() as ResponseType;
+      console.log(res);
+      if (res.ok) {
+        navigate(0);
+      } else {
+        setErrorMessage(res.message);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
   
@@ -43,7 +51,7 @@ const DeleteModal = ({ isOpen, setIsOpen, onDelete, variant }: Props) => {
         mx-2
         h-fit
       ">
-        <h4 className="text-gray-600 text-2xl font-medium text-center">
+        <h4 className="text-gray-600 text-lg font-medium text-center">
           Do you want to delete this {variant}
         </h4>
         <p className='text-red-500 text-center font-medium'>{errorMessage && errorMessage}</p>
@@ -52,15 +60,26 @@ const DeleteModal = ({ isOpen, setIsOpen, onDelete, variant }: Props) => {
             type="button"
             className={`${buttonCommonStyles} text-gray-600 border-gray-600 border`}
             onClick={() => setIsOpen(false)}
+            disabled={isLoading}
           >
             Cancel
           </button>
           <button
             type="button"
-            className={`${buttonCommonStyles} bg-red-600 text-white`}
+            className={`${buttonCommonStyles} disabled:bg-gray-400 bg-red-600 text-white`}
             onClick={handleDelete}
+            disabled={isLoading}
           >
-            Delete
+            {
+              isLoading
+              ?
+              <Loader 
+                size={2}
+                isDark={true}
+              />
+              :
+              <span>Delete</span>
+            }
           </button>
         </div>
       </div> 

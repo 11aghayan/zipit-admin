@@ -65,3 +65,10 @@ export type SizeType = {
 export type SizeUnitType = 'mm' | 'cm' | 'm';
 
 export type PromoType = number | null;
+
+export type ResponseType = {
+  ok: true
+} | {
+  ok: false;
+  message: string;
+};

@@ -25,9 +25,9 @@ const ItemForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   
-  const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [categories, setCategories] = useState<CategoryType[] | null>(null);
 
-  const [category, setCategory] = useState<CategoryType>(currentData?.category || categories[0]);
+  const [category, setCategory] = useState<CategoryType>(currentData?.category || (categories ? categories[0] : ''));
   const [name, setName] = useState<LanguageStringType>(currentData?.name || {am: '', ru: ''});
   const [price, setPrice] = useState(currentData?.price || 0);
   const [promo, setPromo] = useState<PromoType>(currentData?.promo || null);
@@ -37,6 +37,11 @@ const ItemForm = () => {
   const [description, setDescription] = useState<LanguageStringType>(currentData?.description || {am: '', ru: ''});
   
   const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const setErrorAndLoading = (error: string, loading: boolean = false) => {
+    setErrorMessage(error);
+    setIsLoading(loading);
+  };
   
   useEffect(() => {
     getAllCategories()
@@ -44,21 +49,19 @@ const ItemForm = () => {
         setCategories(data);
         if (!category) setCategory(data[0]);
       });
-  }, [categories.length, category]);
+  }, [categories?.length, category]);
   
   const onSubmit = () => {
-    setIsLoading(true);
+    setErrorAndLoading('', true);
     
-    if (!category) return setErrorMessage('Category not provided');
-    if (!name.am) return setErrorMessage('Name(AM) not provided');
-    if (!name.ru) return setErrorMessage('Name(RU) not provided');
-    if (!price) return setErrorMessage('Price must be number bigger than 0');
-    if (promo !== null && promo < 0) return setErrorMessage('Promo cannot be a negative number');
-    if (size === undefined) return setErrorMessage('Size not provided');
-    if (minOrder.qty < 1) return setErrorMessage('Min order must be number bigger than 0');
-    if (!photos.length) return setErrorMessage('No Photos Provided');
-
-    setErrorMessage('');
+    if (!category) return setErrorAndLoading('Category not provided');
+    if (!name.am) return setErrorAndLoading('Name(AM) not provided');
+    if (!name.ru) return setErrorAndLoading('Name(RU) not provided');
+    if (!price) return setErrorAndLoading('Price must be number bigger than 0');
+    if (promo !== null && promo < 0) return setErrorAndLoading('Promo cannot be a negative number');
+    if (size === undefined) return setErrorAndLoading('Size not provided');
+    if (minOrder.qty < 1) return setErrorAndLoading('Min order must be number bigger than 0');
+    if (!photos.length) return setErrorAndLoading('No Photos Provided');
     
     const body: Omit<ItemType, 'id'> = {
       category,
@@ -77,7 +80,7 @@ const ItemForm = () => {
           if (res.ok) {
             navigate(0);
           } else {
-            setErrorMessage('Something went wrong');
+            setErrorMessage(res.message);
           }
         })
         .finally(() => setIsLoading(false));
@@ -87,14 +90,13 @@ const ItemForm = () => {
           if (res.ok) {
             navigate(0);
           } else {
-            setErrorMessage('Something went wrong');
+            setErrorMessage(res.message);
           }
         })
         .finally(() => setIsLoading(false));
     } else {
       setIsLoading(false);
       setErrorMessage('Unknown request type');
-      console.log('Unknown request type');
     }
   };
 
@@ -147,7 +149,9 @@ const ItemForm = () => {
       />
       <p
         className="text-red-600 text-lg font-medium text-center"
-      >{errorMessage && errorMessage}</p>
+      >
+        {errorMessage && errorMessage}
+      </p>
     </AddModalForm>
   );
 };

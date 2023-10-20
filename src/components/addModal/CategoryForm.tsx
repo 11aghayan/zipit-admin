@@ -12,10 +12,13 @@ const CategoryForm = () => {
 
   const navigate = useNavigate();
   
+  const [isLoading, setIsLoading] = useState(false);
   const [label, setLabel] = useState<LanguageStringType>(currentData?.label || { am: '', ru: '' });
   const [errorMessage, setErrorMessage] = useState('');
 
   const onSubmit = () => {
+    setIsLoading(true);
+    
     if (!label.am) return setErrorMessage('No Armenian name provided');
     if (!label.ru) return setErrorMessage('No Russian name provided');
     setErrorMessage('');
@@ -27,20 +30,22 @@ const CategoryForm = () => {
           if (res.ok) {
             navigate(0);
           } else {
-            setErrorMessage('Something went wrong');
+            setErrorMessage(res.message);
           }
-        });
+        })
+        .finally(() => setIsLoading(false));
     } else if (request === 'put') {
       editCategory(label, currentData.id)
           .then(res => {
             if (res.ok) {
               navigate(0);
             } else {
-              setErrorMessage('Something went wrong');
+              setErrorMessage(res.message);
             }
-          });
+          })
+          .finally(() => setIsLoading(false));
     } else {
-      console.log('Unknown request type');
+      setErrorMessage('Unknown request type');
     }
   };
   
@@ -48,6 +53,7 @@ const CategoryForm = () => {
     <div className="pt-10 w-full flex justify-center">
       <AddModalForm
         submit={onSubmit}
+        isLoading={isLoading}
       >
         <div>
           <label htmlFor="label">
