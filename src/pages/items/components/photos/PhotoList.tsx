@@ -11,7 +11,7 @@ const PhotoList = ({ photos, selectedPhoto, setSelectedPhoto }: Props) => {
   
 
   return (
-    <div className="border-b space-y-1 border-gray-900 py-2">
+    <div className="border-b h-48 overflow-auto space-y-1 border-gray-900 py-2">
       {
         photos.map(photo => (
           <PhotoCard 
