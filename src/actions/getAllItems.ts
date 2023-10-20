@@ -6,7 +6,7 @@ export default async function getAllItems() {
   const sp = href.split('?')[1] ? `?${href.split('?')[1]}` : '';  
   
   try {
-    const res = await axios.get(`/admin/items${sp}`);
+    const res = await axios.get(`/items/admin${sp}`);
     const data = res.data as ItemResponseType;
     return data;
   } catch(err) {

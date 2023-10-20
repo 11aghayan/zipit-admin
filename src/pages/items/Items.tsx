@@ -14,7 +14,7 @@ const Items = () => {
 
   return (
     <main>
-      <section className="flex w-full items-center justify-between gap-2">
+      <section className="relative flex w-full items-center justify-between gap-2">
         <FiltersModal 
           isOpen={isFilterOpen}
           setIsOpen={setIsFilterOpen}
