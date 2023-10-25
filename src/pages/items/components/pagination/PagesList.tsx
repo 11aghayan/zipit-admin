@@ -11,7 +11,6 @@ const PagesList = ({ pages }: Props) => {
   const navigate = useNavigate();
 
   const handleNext = () => {
-    console.log(page, pages);
     if (page < pages) {
       setSp(prev => ({
         ...prev,

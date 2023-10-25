@@ -21,9 +21,14 @@ export type CategoryType = {
   itemsQty: number
 };
 
+export type ItemCategoryType = {
+  id: string;
+  name: LanguageStringType;
+}
+
 export type ItemType = {
   id: string;
-  category: CategoryType;
+  category: ItemCategoryType;
   name: LanguageStringType;
   price: number;
   promo: PromoType;

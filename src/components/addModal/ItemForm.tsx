@@ -5,7 +5,7 @@ import getAllCategories from "@/actions/getAllCategories";
 import useAddModalContext from "@/hooks/useAddModalContext";
 import addItem from "@/actions/addItem";
 
-import { CategoryType, ItemType, LanguageStringType, MinOrderType, AddModalContextType, PromoType, SizeType, PhotoType } from "@/types";
+import { CategoryType, ItemType, LanguageStringType, MinOrderType, AddModalContextType, PromoType, SizeType, PhotoType, ItemCategoryType } from "@/types";
 
 import AddModalForm from "./AddModalForm";
 import CategorySelector from "./CategorySelector";
@@ -27,7 +27,7 @@ const ItemForm = () => {
   
   const [categories, setCategories] = useState<CategoryType[] | null>(null);
 
-  const [category, setCategory] = useState<CategoryType>(currentData?.category || (categories ? categories[0] : ''));
+  const [category, setCategory] = useState<ItemCategoryType>(currentData?.category || (categories ? { id: categories[0].id, name: categories[0].label } : null));
   const [name, setName] = useState<LanguageStringType>(currentData?.name || {am: '', ru: ''});
   const [price, setPrice] = useState(currentData?.price || 0);
   const [promo, setPromo] = useState<PromoType>(currentData?.promo || null);
@@ -35,7 +35,7 @@ const ItemForm = () => {
   const [minOrder, setMinOrder] = useState<MinOrderType>(currentData?.minOrder || {qty: 0, unit: 'pcs'});
   const [photos, setPhotos] = useState<PhotoType[]>(currentData?.photos || []);
   const [description, setDescription] = useState<LanguageStringType>(currentData?.description || {am: '', ru: ''});
-  
+
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const setErrorAndLoading = (error: string, loading: boolean = false) => {
@@ -47,7 +47,7 @@ const ItemForm = () => {
     getAllCategories()
       .then(data => {
         setCategories(data);
-        if (!category) setCategory(data[0]);
+        if (!category) setCategory({ id: data[0].id, name: data[0].label });
       });
   }, [categories?.length, category]);
   
@@ -73,7 +73,7 @@ const ItemForm = () => {
       minOrder,
       photos
     };
-
+    
     if (request === 'post') {
       addItem(body)
         .then(res => {
