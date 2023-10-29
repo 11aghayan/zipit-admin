@@ -87,3 +87,13 @@ export type AuthContextType = {
   auth: AuthType;
   setAuth: React.Dispatch<React.SetStateAction<AuthType>>;
 }
+
+export type ChangePasswordType = {
+  password: string;
+  newPassword: string;
+  newPasswordRepeat: string;
+}
+
+export type CustomErrorType = { 
+  data: { ok: boolean, message: string }
+}

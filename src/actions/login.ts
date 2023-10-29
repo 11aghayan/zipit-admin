@@ -1,4 +1,5 @@
 import axios from '@/libs/axios';
+import { CustomErrorType } from '@/types';
 import { AxiosError } from 'axios';
 
 type BodyType = {
@@ -13,7 +14,7 @@ export default async function login(body: BodyType) {
   } catch (error) {
     console.log(error);  
     const axiosError = error as AxiosError;
-    const customError = axiosError.response as { data: { ok: boolean, message: string }};
+    const customError = axiosError.response as CustomErrorType;
     return customError?.data || { ok: false, message: 'Server Error'};
   }
 }

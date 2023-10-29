@@ -1,4 +1,5 @@
 import Navbar from "./Navbar";
+import SettingsButton from "./SettingsButton";
 import SignOutBtn from "./SignOutBtn";
 
 const Header = () => {
@@ -19,7 +20,10 @@ const Header = () => {
       after:top-full
     ">
       <Navbar />
-      <SignOutBtn />
+      <div className="flex items-center gap-6">
+        <SettingsButton />
+        <SignOutBtn />
+      </div>
     </header>
   );
 };

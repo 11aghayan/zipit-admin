@@ -29,7 +29,7 @@ const PersistentLogin = () => {
       {
         isLoading
         ?
-        <div>
+        <div className="fixed inset-0 flex items-center justify-center">
           <TextLoader 
             size={2}
           />
