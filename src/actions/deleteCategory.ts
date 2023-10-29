@@ -1,9 +1,9 @@
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 
-import axios from '@/libs/axios';
 import { ResponseType } from '@/types';
 
-export default async function deleteCategory(id: string) {
+export default async function deleteCategory(id: string, axios: AxiosInstance) {
+
   try {
     const res = await axios.delete(`/categories/${id}`);
     return res.data as ResponseType;

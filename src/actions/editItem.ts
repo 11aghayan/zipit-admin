@@ -1,9 +1,8 @@
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 
-import axios from '@/libs/axios';
 import { ItemType, ResponseType } from '@/types';
 
-export default async function editItem(body: Omit<ItemType, 'id'>, id: string) {
+export default async function editItem(body: Omit<ItemType, 'id'>, id: string, axios: AxiosInstance) {
   try {
     const res = await axios.put(`/items/${id}`, body);
     return res.data as ResponseType;

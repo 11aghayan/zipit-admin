@@ -25,7 +25,6 @@ const DeleteModal = ({ isOpen, setIsOpen, onDelete, variant }: Props) => {
 
     try {
       const res = await onDelete() as ResponseType;
-      console.log(res);
       if (res.ok) {
         navigate(0);
       } else {

@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import getAllCategories from "@/actions/getAllCategories";
 import { CategoryType } from "@/types";
 import cn from "@/utils/cn";
+import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 
 import Buttons from "./Buttons";
 
@@ -20,6 +21,8 @@ type FiltersType = {
 const FiltersModal = ({ isOpen, setIsOpen }: Props) => {
   const navigate = useNavigate();
   const [sp, setSp] = useSearchParams();
+
+  const axios = useAxiosPrivate();
   
   const filters = useRef<FiltersType>({
     categories: sp.get('categories') ? sp.get('categories')!.split(',') : [],
@@ -72,9 +75,9 @@ const FiltersModal = ({ isOpen, setIsOpen }: Props) => {
   };
   
   useEffect(() => {
-    getAllCategories()
+    getAllCategories(axios)
       .then(res => setCategories(res));
-  }, [strCategories]);
+  }, [strCategories, axios]);
 
 
   return (

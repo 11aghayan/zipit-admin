@@ -1,14 +1,19 @@
 import { useState } from "react";
-import AddModalForm from "./AddModalForm";
-import useAddModalContext from "@/hooks/useAddModalContext";
 import { useNavigate } from "react-router-dom";
+
+import useAddModalContext from "@/hooks/useAddModalContext";
 import addCategory from "@/actions/addCategory";
 import { CategoryType, LanguageStringType } from "@/types";
 import editCategory from "@/actions/editCategory";
+import useAxiosPrivate from "@/hooks/useAxiosPrivate";
+
+import AddModalForm from "./AddModalForm";
 
 const CategoryForm = () => {
   const { data, request } = useAddModalContext();
   const currentData = data as CategoryType || null;
+
+  const axios = useAxiosPrivate();
 
   const navigate = useNavigate();
   
@@ -25,7 +30,7 @@ const CategoryForm = () => {
     
     if (request === 'post') {
       const body = { label };
-      addCategory(body)
+      addCategory(body, axios)
         .then(res => {
           if (res.ok) {
             navigate(0);
@@ -35,7 +40,7 @@ const CategoryForm = () => {
         })
         .finally(() => setIsLoading(false));
     } else if (request === 'put') {
-      editCategory(label, currentData.id)
+      editCategory(label, currentData.id, axios)
           .then(res => {
             if (res.ok) {
               navigate(0);

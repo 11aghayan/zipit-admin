@@ -7,6 +7,7 @@ import { CategoryType, ItemType, ModalVariantType } from '@/types';
 import DeleteModal from '@/components/DeleteModal';
 import deleteItem from '@/actions/deleteItem';
 import deleteCategory from '@/actions/deleteCategory';
+import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 
 type Props = {
   data: ItemType | CategoryType;
@@ -17,9 +18,11 @@ const ChangeDeleteButtons = ({ data, variant }: Props) => {
   const { toggleOpen: toggleAdd, setVariant, setData, setRequest } = useAddModalContext();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  const axios = useAxiosPrivate();
+
   const deleteFunc = async () => {
-    if (variant === 'item') return await deleteItem(data.id);
-    if (variant === 'category') return await deleteCategory(data.id);
+    if (variant === 'item') return await deleteItem(data.id, axios);
+    if (variant === 'category') return await deleteCategory(data.id, axios);
     return { ok: false };
   };
   

@@ -1,9 +1,9 @@
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 
-import axios from '@/libs/axios';
 import { ItemType, ResponseType } from '@/types';
 
-export default async function addItem(body: Omit<ItemType, 'id'>) {
+export default async function addItem(body: Omit<ItemType, 'id'>, axios: AxiosInstance) {
+  
   try {
     const res = await axios.post('/items', body);
     return res.data as ResponseType;

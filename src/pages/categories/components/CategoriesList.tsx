@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { CategoryType } from "@/types";
 import getAllCategories from "@/actions/getAllCategories";
 import TextLoader from "@/components/loader/TextLoader";
+import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 
 import CategoryCard from "./CategoryCard";
 
@@ -10,10 +11,12 @@ const CategoriesList = () => {
   const [categories, setCategories] = useState<CategoryType[] | null>(null);
   const strCategories = JSON.stringify(categories);
 
+  const axios = useAxiosPrivate();
+
   useEffect(() => {
-    getAllCategories()
+    getAllCategories(axios)
       .then(data => setCategories(data));
-  }, [strCategories]); 
+  }, [strCategories, axios]); 
 
   return (
     <section className="mt-10 space-y-2">

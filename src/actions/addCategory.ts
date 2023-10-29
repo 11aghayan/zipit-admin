@@ -1,9 +1,8 @@
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 
-import axios from '@/libs/axios';
 import { LanguageStringType, ResponseType } from '@/types';
 
-export default async function(body: { label: LanguageStringType }) {
+export default async function(body: { label: LanguageStringType }, axios: AxiosInstance) {
   try {
     const res = await axios.post('/categories', body);
     return res.data as ResponseType;

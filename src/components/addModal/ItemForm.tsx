@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import getAllCategories from "@/actions/getAllCategories";
 import useAddModalContext from "@/hooks/useAddModalContext";
 import addItem from "@/actions/addItem";
+import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 
 import { CategoryType, ItemType, LanguageStringType, MinOrderType, AddModalContextType, PromoType, SizeType, PhotoType, ItemCategoryType } from "@/types";
 
@@ -19,6 +20,7 @@ import Photos from "./photos/Photos";
 
 const ItemForm = () => {
   const navigate = useNavigate();
+  const axios = useAxiosPrivate();
 
   const { data, request } = useAddModalContext() as AddModalContextType;
   const currentData = data as ItemType;
@@ -44,12 +46,12 @@ const ItemForm = () => {
   };
   
   useEffect(() => {
-    getAllCategories()
+    getAllCategories(axios)
       .then(data => {
         setCategories(data);
         if (!category) setCategory({ id: data[0].id, name: data[0].label });
       });
-  }, [categories?.length, category]);
+  }, [categories?.length, category, axios]);
   
   const onSubmit = () => {
     setErrorAndLoading('', true);
@@ -75,7 +77,7 @@ const ItemForm = () => {
     };
     
     if (request === 'post') {
-      addItem(body)
+      addItem(body, axios)
         .then(res => {
           if (res.ok) {
             navigate(0);
@@ -85,7 +87,7 @@ const ItemForm = () => {
         })
         .finally(() => setIsLoading(false));
     } else if (request === 'put') {
-      editItem(body, data?.id as string)
+      editItem(body, data?.id as string, axios)
         .then(res => {
           if (res.ok) {
             navigate(0);

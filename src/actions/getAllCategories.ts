@@ -1,6 +1,6 @@
-import axios from '@/libs/axios';
+import { AxiosInstance } from "axios";
 
-export default async function getAllCategories() {
+export default async function getAllCategories(axios: AxiosInstance) {
   try {
     const { data } = await axios.get('/categories/admin');
     return data;

@@ -1,7 +1,7 @@
-import axios from '@/libs/axios';
 import { ItemResponseType } from '@/types';
+import { AxiosInstance } from 'axios';
 
-export default async function getAllItems() {
+export default async function getAllItems(axios: AxiosInstance) {
   const { href } = window.location;
   const sp = href.split('?')[1] ? `?${href.split('?')[1]}` : '';  
   

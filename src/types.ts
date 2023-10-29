@@ -77,3 +77,13 @@ export type ResponseType = {
   ok: false;
   message: string;
 };
+
+export type AuthType = {
+  accessToken: string;
+  loggedIn: boolean;
+}
+
+export type AuthContextType = {
+  auth: AuthType;
+  setAuth: React.Dispatch<React.SetStateAction<AuthType>>;
+}

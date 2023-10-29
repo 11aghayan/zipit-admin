@@ -1,19 +1,43 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import login from "@/actions/login";
+import useAuthContext from "@/hooks/useAuthContext";
+
 import LoginButton from "./LoginButton";
 import LoginInputs from "./LoginInputs";
 
-const LoginForm = () => {
+type Props = {
+  from: string;
+}
+
+const LoginForm = ({ from }: Props) => {
+  const navigate = useNavigate();
+
+  const { setAuth } = useAuthContext();
+  
   const [body, setBody] = useState({ username: '', password: '' });
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
     setError('');
     e.preventDefault();
 
     if (!body.username) return setError('Username not provided');
     if (!body.password) return setError('Password not provided');
     
-    console.log(body);
+    login(body)
+      .then(response => {
+        if (!response?.ok) {
+          setError(response.message);
+        } else {
+          setAuth({ loggedIn: true, accessToken: response.accessToken });
+          navigate(from);
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -27,7 +51,9 @@ const LoginForm = () => {
         setBody={setBody}
       />
       {error && <p className="text-center text-red-600 text-lg">{error}</p>}
-      <LoginButton />
+      <LoginButton 
+        isLoading={isLoading}
+      />
     </form>
   );
 };

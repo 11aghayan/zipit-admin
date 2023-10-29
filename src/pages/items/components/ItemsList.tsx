@@ -2,9 +2,10 @@ import { useEffect } from "react";
 
 import getAllItems from "@/actions/getAllItems";
 import { ItemResponseType } from "@/types";
+import TextLoader from "@/components/loader/TextLoader";
+import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 
 import ItemCard from "./ItemCard";
-import TextLoader from "@/components/loader/TextLoader";
 
 type Props = {
   items: ItemResponseType | null;
@@ -12,13 +13,14 @@ type Props = {
 };
 
 const ItemsList = ({ items, setItems }: Props) => {
+  const axios = useAxiosPrivate();
 
   useEffect(() => {
-    getAllItems()
+    getAllItems(axios)
     .then(data => {
       setItems(data);
     });
-  }, [setItems]);
+  }, [setItems, axios]);
   
   return (
     <section className="
