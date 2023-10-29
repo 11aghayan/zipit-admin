@@ -97,3 +97,14 @@ export type ChangePasswordType = {
 export type CustomErrorType = { 
   data: { ok: boolean, message: string }
 }
+
+export type ApiRouteType = {
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+  label: string,
+  route: string,
+  isProtected: boolean
+}
+
+export type ApiRoutesType = {
+  [routeName: string]: ApiRouteType[]
+}

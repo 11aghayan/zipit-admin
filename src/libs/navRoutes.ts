@@ -1,5 +1,9 @@
 const navRoutes = [
   {
+    label: 'API',
+    href: '.'
+  },
+  {
     label: 'Categories',
     href: 'categories'
   },

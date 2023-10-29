@@ -1,6 +1,6 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 
-import Home from "@/pages/Home";
+import ApiPage from "@/pages/apiPage/ApiPage";
 import NotFound from "@/pages/NotFound";
 import Categories from "@/pages/categories/Categories";
 import Items from "@/pages/items/Items";
@@ -15,7 +15,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route element={<PersistentLogin />}>
       <Route element={<ProtectedRoutes />}>
         <Route element={<Layout />} >
-          <Route index element={<Home />} />
+          <Route index element={<ApiPage />} />
           <Route path="categories" element={<Categories />} />
           <Route path="items" element={<Items />} />
           <Route path="settings" element={<Settings />} />
