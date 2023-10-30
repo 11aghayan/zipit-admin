@@ -2,7 +2,11 @@ import { AxiosError, AxiosInstance } from 'axios';
 
 import { LanguageStringType, ResponseType } from "@/types";
 
-export default async function editCategory(body: LanguageStringType, id: string, axios: AxiosInstance) {
+type BodyType = {
+  label: LanguageStringType;
+}
+
+export default async function editCategory(body: BodyType, id: string, axios: AxiosInstance) {
   try {
     const res = await axios.put(`/categories/${id}`, body);
     return res.data as ResponseType;

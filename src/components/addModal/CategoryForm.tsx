@@ -40,7 +40,7 @@ const CategoryForm = () => {
         })
         .finally(() => setIsLoading(false));
     } else if (request === 'put') {
-      editCategory(label, currentData.id, axios)
+      editCategory({ label }, currentData.id, axios)
           .then(res => {
             if (res.ok) {
               navigate(0);
