@@ -20,7 +20,6 @@ const SignOutBtn = () => {
     logout()
     .then(res => {
       if (res.ok) {
-          console.log(res);
           setAuth({ loggedIn: false, accessToken: '' });
           navigate('/login', { replace: true });        
         } else {
