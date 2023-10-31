@@ -7,6 +7,7 @@ export default function () {
   const refresh = async () => {
     const response = await axios.get('/auth/refresh', { withCredentials: true});
     if (response.status === 200) {
+      console.log(response);
       setAuth({ loggedIn: true, accessToken: response.data.accessToken });
       return response.data.accessToken;
     }
