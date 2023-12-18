@@ -82,14 +82,14 @@ const FiltersModal = ({ isOpen, setIsOpen }: Props) => {
 
   return (
     <form 
-      className={cn("bg-slate-300 p-3 rounded-xl shadow-md absolute right-0 top-full min-w-[200px] max-w-xs", isOpen ? 'block' : 'hidden')}
+      className={cn("bg-slate-300 p-3 rounded-xl shadow-md absolute right-0 top-full min-w-[200px] max-w-fit", isOpen ? 'block' : 'hidden')}
       onSubmit={handleSubmit}
     >
-      <div className="border-b border-gray-900 pb-2">
+      <div className="border-b border-gray-900 pb-2 px-2 max-h-80 overflow-auto">
         <h3 className="text-xl text-gray-900 font-medium">
           Categories
         </h3>
-        <div className="flex gap-3 flex-wrap">
+        <div className="flex gap-1 flex-col">
           {
             categories.map(category => (
               <div

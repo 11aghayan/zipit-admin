@@ -1,12 +1,39 @@
 import navRoutes from "@/libs/navRoutes";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 
 const Navbar = () => {
+
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const isMobile = windowSize < 1000;
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      navigate('categories', { replace: true });
+    }
+  }, [isMobile, navigate]);
+
+  const routes = !isMobile ? navRoutes : navRoutes.slice(1);
+  
   return (
     <nav className="flex items-center gap-3 md:gap-5">
       {
-        navRoutes.map(route => (
+        routes.map(route => (
           <NavLink 
             key={route.href}
             to={route.href}
