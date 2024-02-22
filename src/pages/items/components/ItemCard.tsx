@@ -33,7 +33,6 @@ const ItemCard = ({
         p-2
         rounded-xl
         shadow-md
-        w-80
       "
     >
       <SelectedPhoto 
