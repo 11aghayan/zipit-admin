@@ -11,7 +11,7 @@ import PagesList from "./components/pagination/PagesList";
 const Items = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [items, setItems] = useState<ItemResponseType | null>(null);
-
+  
   return (
     <main>
       <section className="relative flex w-full items-center justify-between gap-2">
