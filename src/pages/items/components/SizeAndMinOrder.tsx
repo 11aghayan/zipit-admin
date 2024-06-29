@@ -8,7 +8,7 @@ type Props = {
 const SizeAndMinOrder = ({ size, minOrder }: Props) => {
   return (
     <div className="border-b border-gray-900 pb-2">
-      <p className="text-gray-900 text-lg text-center">Size: {size.val} {size.unit}</p>
+      <p className="text-gray-900 text-lg text-center">Sizes: [{size.values.join(', ')}] {size.unit}</p>
       <p className="text-gray-900 text-lg text-center capitalize">Min Order: {minOrder.qty} {minOrder.unit}</p>
     </div>
   );
