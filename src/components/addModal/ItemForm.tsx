@@ -14,9 +14,10 @@ import Name from "./Name";
 import Description from "./Description";
 import MinOrder from "./MinOrder";
 import Promo from "./Promo";
-import Size from "./Size";
+import Size from "./size/Size";
 import editItem from "@/actions/editItem";
 import Photos from "./photos/Photos";
+import AddSize from "./size/AddSize";
 
 const ItemForm = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const ItemForm = () => {
   const [name, setName] = useState<LanguageStringType>(currentData?.name || {am: '', ru: ''});
   const [price, setPrice] = useState(currentData?.price || 0);
   const [promo, setPromo] = useState<PromoType>(currentData?.promo || null);
-  const [size, setSize] = useState<SizeType>(currentData?.size || {val: 0, unit: 'cm'});
+  const [size, setSize] = useState<SizeType>(currentData?.size || {values: [0], unit: 'cm'});
   const [minOrder, setMinOrder] = useState<MinOrderType>(currentData?.minOrder || {qty: 0, unit: 'pcs'});
   const [photos, setPhotos] = useState<PhotoType[]>(currentData?.photos || []);
   const [description, setDescription] = useState<LanguageStringType>(currentData?.description || {am: '', ru: ''});
@@ -137,6 +138,7 @@ const ItemForm = () => {
         size={size}
         setSize={setSize}
       />
+      <AddSize setSize={setSize} />
       <MinOrder 
         minOrder={minOrder}
         setMinOrder={setMinOrder}

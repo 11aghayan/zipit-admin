@@ -6,13 +6,13 @@ type Props = {
   setPhotos: React.Dispatch<SetStateAction<PhotoType[]>>;
 };
 
-const Quantity = ({ photo, setPhotos }: Props) => {
+const Available = ({ photo, setPhotos }: Props) => {
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const qty = Number(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const available = e.target.value === 'true' ? true : false;
     setPhotos(prev => prev.map(p => {
       if (p.src === photo.src) {
-        return {...p, qty};
+        return {...p, available};
       } else {
         return p;
       }
@@ -25,22 +25,21 @@ const Quantity = ({ photo, setPhotos }: Props) => {
         htmlFor="qty"
         className="block"
       >
-        Qty
+        Available
       </label>
-      <input 
-        name="qty"
-        id="qty"
-        type="number"
+      <select 
+        name="available"
+        id="available"
         style={{
           width: '7rem'
         }}
-        placeholder="Quantity"
-        min={0}
-        defaultValue={photo.qty}
         onChange={handleChange}
-      />
+      >
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
     </div>
   );
 };
 
-export default Quantity;
+export default Available;

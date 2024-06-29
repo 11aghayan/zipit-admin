@@ -40,7 +40,7 @@ export type ItemType = {
 
 export type PhotoType = {
   src: string;
-  qty: number;
+  available: boolean;
   color: LanguageStringType;
 };
 
@@ -63,7 +63,7 @@ export type MinOrderType = {
 export type MinOrderUnitType = 'pcs' | 'cm' | 'box' | 'roll';
 
 export type SizeType = {
-  val: number;
+  values: number[];
   unit: SizeUnitType;
 };
 

@@ -14,7 +14,7 @@ const PhotoAdder = ({ setPhotos }: Props) => {
     if (!image) return;
 
     const fileObj = {
-      qty: 0,
+      available: true,
       src: image,
       color: {
         am: '',
