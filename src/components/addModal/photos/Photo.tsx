@@ -1,7 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
-
-import Quantity from "@/components/addModal/Quantity";
 import { PhotoType } from "@/types";
 
 import ColorName from "@/components/addModal/ColorName";
@@ -32,10 +30,6 @@ const EachPhoto = ({ photo, setPhotos }: Props) => {
       </div>
       <div className="space-y-3">
         <ColorName 
-          photo={photo}
-          setPhotos={setPhotos}
-        />
-        <Quantity 
           photo={photo}
           setPhotos={setPhotos}
         />

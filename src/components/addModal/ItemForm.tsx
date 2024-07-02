@@ -34,7 +34,7 @@ const ItemForm = () => {
   const [name, setName] = useState<LanguageStringType>(currentData?.name || {am: '', ru: ''});
   const [price, setPrice] = useState(currentData?.price || 0);
   const [promo, setPromo] = useState<PromoType>(currentData?.promo || null);
-  const [size, setSize] = useState<SizeType>(currentData?.size || {values: [0], unit: 'cm'});
+  const [size, setSize] = useState<SizeType>(currentData?.size || {values: [{ value: 0, available: true }], unit: 'cm'});
   const [minOrder, setMinOrder] = useState<MinOrderType>(currentData?.minOrder || {qty: 0, unit: 'pcs'});
   const [photos, setPhotos] = useState<PhotoType[]>(currentData?.photos || []);
   const [description, setDescription] = useState<LanguageStringType>(currentData?.description || {am: '', ru: ''});

@@ -40,7 +40,6 @@ export type ItemType = {
 
 export type PhotoType = {
   src: string;
-  available: boolean;
   color: LanguageStringType;
 };
 
@@ -63,8 +62,13 @@ export type MinOrderType = {
 export type MinOrderUnitType = 'pcs' | 'cm' | 'box' | 'roll';
 
 export type SizeType = {
-  values: number[];
+  values: SizeValueType[];
   unit: SizeUnitType;
+};
+
+export type SizeValueType = {
+  available: boolean;
+  value: number;
 };
 
 export type SizeUnitType = 'mm' | 'cm' | 'm';

@@ -28,7 +28,6 @@ const PhotoCard = ({ photo, selectedPhoto, setSelectedPhoto }: Props) => {
       <div>
         <p>Color AM: {photo.color.am}</p>
         <p>Color RU: {photo.color.ru}</p>
-        <p>Available: {photo.available}</p>
       </div>
     </article>
   );
