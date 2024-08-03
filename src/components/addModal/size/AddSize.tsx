@@ -9,7 +9,7 @@ const AddSize = ({ setSize }: Props) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setSize(prev => {
-      return { ...prev, values: [...prev.values, { available: true, value: 0 }] };
+      return { ...prev, values: [...prev.values, { colors: [], value: 0 }] };
     });
   };
   

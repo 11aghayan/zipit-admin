@@ -67,8 +67,8 @@ export type SizeType = {
 };
 
 export type SizeValueType = {
-  available: boolean;
   value: number;
+  colors: string[];
 };
 
 export type SizeUnitType = 'mm' | 'cm' | 'm';

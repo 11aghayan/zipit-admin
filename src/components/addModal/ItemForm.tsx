@@ -31,13 +31,13 @@ const ItemForm = () => {
   const [categories, setCategories] = useState<CategoryType[] | null>(null);
 
   const [category, setCategory] = useState<ItemCategoryType>(currentData?.category || (categories ? { id: categories[0].id, name: categories[0].label } : null));
-  const [name, setName] = useState<LanguageStringType>(currentData?.name || {am: '', ru: ''});
+  const [name, setName] = useState<LanguageStringType>(currentData?.name || { am: '', ru: '' });
   const [price, setPrice] = useState(currentData?.price || 0);
   const [promo, setPromo] = useState<PromoType>(currentData?.promo || null);
-  const [size, setSize] = useState<SizeType>(currentData?.size || {values: [{ value: 0, available: true }], unit: 'cm'});
+  const [size, setSize] = useState<SizeType>(currentData?.size || { values: [{ value: 0, colors: [] }], unit: 'cm'} );
   const [minOrder, setMinOrder] = useState<MinOrderType>(currentData?.minOrder || {qty: 0, unit: 'pcs'});
   const [photos, setPhotos] = useState<PhotoType[]>(currentData?.photos || []);
-  const [description, setDescription] = useState<LanguageStringType>(currentData?.description || {am: '', ru: ''});
+  const [description, setDescription] = useState<LanguageStringType>(currentData?.description || { am: '', ru: '' });
 
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -137,6 +137,7 @@ const ItemForm = () => {
       <Size 
         size={size}
         setSize={setSize}
+        colors={photos.map(p => `${p.color.am}&dash&${p.color.ru}`)}
       />
       <AddSize setSize={setSize} />
       <MinOrder 
@@ -154,7 +155,7 @@ const ItemForm = () => {
       <p
         className="text-red-600 text-lg font-medium text-center"
       >
-        {errorMessage && errorMessage}
+        {errorMessage ? errorMessage : null}
       </p>
     </AddModalForm>
   );
