@@ -21,11 +21,21 @@ const Size = ({ size, setSize, colors }: Props) => {
   };
 
   const handleColorPick = (sizeIndex: number) => {
-    return (e: React.ChangeEvent<HTMLSelectElement>) => {
+    return (e: React.ChangeEvent<HTMLInputElement>) => {
       setSize(prev => {
-        const selected = Array.from(e.target.selectedOptions).map(option => option.value);
+        const checked = e.target.checked;
+        console.log(checked);
+        const color = e.target.value;
         const values = size.values;
-        values[sizeIndex].colors = selected;
+        const colors = values[sizeIndex].colors;
+        if (checked) {
+          if (!colors.includes(color)) {
+            values[sizeIndex].colors.push(color);
+          }
+        } else {
+          values[sizeIndex].colors = colors.filter(c => c !== color);
+        }
+        console.log(values[sizeIndex].colors);
         return {
           ...prev,
           values
@@ -71,24 +81,27 @@ const Size = ({ size, setSize, colors }: Props) => {
                     return { ...prev, values };
                   })}
                 />
-                <select 
-                  multiple 
-                  className='h-fit'
-                  onChange={handleColorPick(sizeIndex)}
+                <div 
+                  className='border space-y-1 border-gray-500 p-2 rounded-md bg-white'
                   defaultValue={sizeValue.colors}
                 >
                   {
                     colors.map((color) => (
-                      <option
-                        key={color}
-                        className='h-fit'
-                        value={color}
-                      >
-                        {color.split('&dash&')[0]}
-                      </option>
+                      <div key={`${color}-${sizeIndex}`} className='flex items-center gap-2 border border-gray-400 p-1'>
+                        <label htmlFor={`${color}-${sizeIndex}`} className='text-gray-700'>
+                          {color.split('&dash&')[0]}
+                        </label>
+                        <input
+                          type='checkbox'
+                          defaultChecked={!!(size.values.find(value => value.colors.includes(color)))}
+                          id={`${color}-${sizeIndex}`}
+                          onChange={handleColorPick(sizeIndex)}
+                          value={color}
+                        />
+                      </div>
                     ))
                   }
-                </select>
+                </div>
               </div>
             </div>
           ))
